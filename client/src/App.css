@@ -9,6 +9,11 @@
     /* z-index: -1; */
 }
 
+.btnDiv {
+    padding: 17px;
+    margin-right: 1.5%;
+}
+
 .details-card {
     width: 200%;
     flex-direction: row;

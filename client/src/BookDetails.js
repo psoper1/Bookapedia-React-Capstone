@@ -3,13 +3,22 @@ import Nav from './Nav';
 import Logo from './Logo';
 
 const BookDetails = ({ book }) => {
+
+    const handleClick = () => {
+        // This function will add the book to the bookshelf
+        console.log('clicked')
+    }
+
+
     return (
         <>
             <Nav />
             <Logo />
+            <div className="text-center btnDiv">
+                <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
+            </div>
             <div className="book-details">
                 <div key={book.id} className="cardPadding col-md-4">
-                <button className="btn justify-content-center">Add to my bookshelf!</button>
                     <div className="details-card text-center">
 
                         <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
