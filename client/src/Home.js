@@ -1,8 +1,9 @@
 import Logo from "./Logo";
 import Nav from "./Nav";
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
-function Home() {
+function Home({book, setBook}) {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [clicked, setClicked] = useState(false)
@@ -32,6 +33,12 @@ function Home() {
         fetchSearchResults();
     }
 
+    const handleBookClick = (book) => {
+        setBook(book);
+        console.log('in handle book function')
+        console.log(book)
+      };
+
     return (
         <>
             <Nav />
@@ -42,8 +49,6 @@ function Home() {
                         id="input"
                         className="inputField form-control me-2"
                         type="text"
-                    // value={searchQuery}
-                    // onChange={(event) => setSearchQuery(event.target.value)}
                     />
                     <button onClick={handleClick} className="btn" type="submit">Search</button>
                 </form>
@@ -52,7 +57,6 @@ function Home() {
                 <div className="row">
                     {clicked && searchResults.length === 0 && <p>Loading restuls or no results were found</p>}
                     {clicked && searchResults.map((book) =>
-                        // <div key={book.id} className="row">
                         <div key={book.id} className="cardPadding col-md-4">
                             <div className="card text-center">
                                 <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
@@ -61,10 +65,10 @@ function Home() {
                                     <p className="card-text">{book.volumeInfo.authors[0]}</p>
                                     <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].type}</p>
                                     <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].identifier}</p>
+                                    <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink>
                                 </div>
                             </div>
                         </div>
-                        /* </div> */
                     )}
                 </div>
             </div>
