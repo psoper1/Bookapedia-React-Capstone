@@ -3,6 +3,10 @@
     margin-left: 22%;
 }
 
+.card {
+    width: 18rem;
+}
+
 .about {
     background-color: #ddb99d;
     border: none;
