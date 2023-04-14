@@ -38,21 +38,37 @@ function Home() {
             <Logo />
             <div className="form-outline">
                 <form className="d-flex">
-                <input
-                    id="input"
-                    className="inputField form-control me-2"
-                    type="text"
-                // value={searchQuery}
-                // onChange={(event) => setSearchQuery(event.target.value)}
-                />
-                <button onClick={handleClick} className="btn" type="submit">Search</button>
+                    <input
+                        id="input"
+                        className="inputField form-control me-2"
+                        type="text"
+                    // value={searchQuery}
+                    // onChange={(event) => setSearchQuery(event.target.value)}
+                    />
+                    <button onClick={handleClick} className="btn" type="submit">Search</button>
                 </form>
-                </div>
-                <div className="results container text-center">
-                {clicked && searchResults.length === 0 && <p>Loading restuls or no results were found</p>}
-                {clicked && searchResults.map((book) => <div key={book.id}>{book.volumeInfo.title && <h2>{book.volumeInfo.title}</h2>}</div>)}
             </div>
-            
+            <div className="results container text-center">
+                <div className="row">
+                    {clicked && searchResults.length === 0 && <p>Loading restuls or no results were found</p>}
+                    {clicked && searchResults.map((book) =>
+                        // <div key={book.id} className="row">
+                        <div key={book.id} className="cardPadding col-md-4">
+                            <div className="card text-center">
+                                <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
+                                <div className="card-body">
+                                    <h5 className="card-title">{book.volumeInfo.title}</h5>
+                                    <p className="card-text">{book.volumeInfo.authors[0]}</p>
+                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].type}</p>
+                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].identifier}</p>
+                                </div>
+                            </div>
+                        </div>
+                        /* </div> */
+                    )}
+                </div>
+            </div>
+
 
         </>
     )

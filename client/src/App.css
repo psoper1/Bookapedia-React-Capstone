@@ -4,7 +4,25 @@
 }
 
 .card {
-    width: 18rem;
+    width: 400px;
+    flex-direction: row;
+    z-index: -1;
+}
+
+.results {
+    margin-left: 18%;
+    margin-top: 4%;
+}
+
+.cardImage {
+    max-width: 200px;
+    max-height: 362px;
+    width: 150px;
+    height: 200px;
+}
+
+.cardPadding {
+    padding-bottom: 15px;
 }
 
 .about {
@@ -34,10 +52,6 @@
     color: teal;
     background-color: #FFD966;
     border-color: #FFF2CC;
-  }
-
-  .results {
-    border:1px solid black;
   }
 
   .bg-image-vertical {
