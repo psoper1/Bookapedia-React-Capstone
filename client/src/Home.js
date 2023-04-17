@@ -50,6 +50,7 @@ function Home({book, setBook, setView}) {
                         id="input"
                         className="inputField form-control me-2"
                         type="text"
+                        placeholder="Type here to search for a book! :)"
                     />
                     <button onClick={handleClick} className="btn" type="submit">Search</button>
                 </form>
