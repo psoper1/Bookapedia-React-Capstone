@@ -4,9 +4,11 @@ import athena from "../src/imgs/athena.webp";
 import AuthService from "../src/services/auth.service";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useGlobalState } from "../src/context/GlobalState";
 
 
 const RegisterPage = () => {
+    const [state, dispatch] = useGlobalState();
     const navigate = useNavigate();
     const [user, setUser] = useState({
         password: "",
@@ -26,7 +28,12 @@ const RegisterPage = () => {
     const handleRegister = (e) => {
         e.preventDefault();
         AuthService.register(user)
-        navigate('/');
+        // dispatch({
+        //     currentUserToken: state.currentUserToken,
+        //     currentUser: state.currentUser.user_id,
+        // })
+        navigate('/login');
+        window.location.reload(true);
     }
 
     return (

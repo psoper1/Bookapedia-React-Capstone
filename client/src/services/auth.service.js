@@ -11,13 +11,13 @@ import {
       this.login = this.login.bind(this);
     }
   
-    async login(username, password) {
+    async login(email, password) {  // changed from username to email since I am not using a username field for login
       try {
         const response = await request({
           url: LOGIN_ENDPOINT,
           method: 'POST',
           data: {
-            username,
+            email,
             password,
           },
         });
@@ -54,7 +54,7 @@ import {
           },
         });
   
-        await this.login(username, password);
+        await this.login(email, password);
       } catch (error) {
         return error.response;
       }
