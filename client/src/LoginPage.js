@@ -7,12 +7,13 @@ import AuthService from "../src/services/auth.service";
 import { useNavigate } from 'react-router-dom';
 import { useGlobalState } from "../src/context/GlobalState";
 import jwtDecode from "jwt-decode";
+// import Footer from "./Footer";
 
 
 
 function LoginPage() {
     let navigate = useNavigate();
-
+    // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
 
     const [email, setEmail] = useState("");
@@ -96,6 +97,7 @@ function LoginPage() {
                     </div>
                 </div>
             </section>
+            {/* <Footer /> */}
         </>
     )
 }

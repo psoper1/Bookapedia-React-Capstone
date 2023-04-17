@@ -1,3 +1,4 @@
+// import Footer from "./Footer";
 import Logo from "./Logo";
 import Nav from "./Nav";
 
@@ -10,6 +11,7 @@ function MyBookshelf({ addBook }) {
         <div className="results container text-center">
         books will populate here / boarder for placement reference
         </div>
+        {/* <Footer /> */}
         </>
     )
 }

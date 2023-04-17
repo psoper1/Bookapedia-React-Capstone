@@ -3,6 +3,7 @@ import { useGlobalState } from "../src/context/GlobalState";
 import Nav from "./Nav";
 
 const Profile = () => {
+  // eslint-disable-next-line
   const [ state, dispatch ] = useGlobalState();
 
   return (

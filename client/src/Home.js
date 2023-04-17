@@ -1,3 +1,4 @@
+// import Footer from "./Footer";
 import Logo from "./Logo";
 import Nav from "./Nav";
 import { useState, useEffect } from "react";
@@ -72,7 +73,7 @@ function Home({book, setBook, setView}) {
                     )}
                 </div>
             </div>
-
+            {/* <Footer /> */}
 
         </>
     )

@@ -7,6 +7,8 @@ import Home from "./Home";
 import BookDetails from "./BookDetails";
 import { useState } from "react";
 import Profile from "./Profile";
+import RegisterSuccess from "./RegisterSuccess";
+import LogoutPage from "./LogoutPage";
 // import handleBookClick from "./Home";
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
             <Route path="/my-bookshelf" element={<MyBookshelf />} />
             <Route path="/chosen-book" element={<BookDetails book={book} />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/registration-success" element={<RegisterSuccess />} />
+            <Route path="/logged-out" element={<LogoutPage />} />
           </Routes>
         </Router>
     </>
