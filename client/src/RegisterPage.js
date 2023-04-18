@@ -75,7 +75,7 @@ const RegisterPage = () => {
                                     </div>
                                     <div className="form-outline mb-4">
                                         <input
-                                            type="passConf"
+                                            type="password"
                                             id="passConf"
                                             className="form-control form-control-lg"
                                             onChange={(e) => handleChange('passwordConf', e.target.value)} />

@@ -1,12 +1,41 @@
 import React from 'react';
 import Nav from './Nav';
 import Logo from './Logo';
+import { useGlobalState } from "../src/context/GlobalState";
+import axios from 'axios';
+import request from './services/api.request';
 
 const BookDetails = ({ book }) => {
+    // eslint-disable-next-line
+    const [state, dispatch] = useGlobalState();
 
-    const handleClick = () => {
-        // This function will add the book to the bookshelf
+    const handleClick = async () => {
+        try {
+            // going to edit - Josh
+            // This is the same thing as you have on lines 31-40 however
+            // it is utilizing the AuthService and some other cool axios features to 
+            // send your credentials of your logged in user to the backend.
+            let options = {
+                url: 'save-book/', // because you have API_URL defined in api.constants, this just attaches to the end of it
+                method: 'POST', // This makes the request set up to be axios.post()
+                data: { // this is everything that you want to send to the backend
+                    title: book.volumeInfo.title,
+                    author: book.volumeInfo.authors[0],
+                    description: book.volumeInfo.description,
+                    // genre: book.volumeInfo.categories[0],
+                    date_published: book.volumeInfo.publishedDate,
+                    marked_read: false,
+                    image_link: book.volumeInfo.imageLinks?.smallThumbnail,
+                    saved_by: state.currentUser.user_id
+                }
+            }
+            let response = await request(options)
+            console.log(response.data)
+        } catch (error) {
+            console.log(error);
+        }
         console.log('clicked')
+        console.log(state.currentUser.user_id)
     }
 
 
