@@ -9,6 +9,12 @@
     /* z-index: -1; */
 }
 
+.delete-item {
+    border: none;
+    background: none;
+    margin-bottom: 44%;
+}
+
 .footer {
     background-color: #f1f1f1;
     position: fixed;

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Nav() {
     const [state, dispatch] = useGlobalState();
+    // const [bookshelfClicked, setBookshelfClicked] = useState(false)
     let navigate = useNavigate();
 
     const handleLogout = (e) => {
