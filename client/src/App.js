@@ -9,6 +9,7 @@ import { useState } from "react";
 import Profile from "./Profile";
 import RegisterSuccess from "./RegisterSuccess";
 import LogoutPage from "./LogoutPage";
+import BookRandomizer from "./BookRandomizer";
 // import handleBookClick from "./Home";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/registration-success" element={<RegisterSuccess />} />
             <Route path="/logged-out" element={<LogoutPage />} />
+            <Route path="book-randomizer" element={<BookRandomizer />} />
           </Routes>
         </Router>
     </>

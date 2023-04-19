@@ -25,8 +25,13 @@ function Nav() {
                     <NavLink to="/" className="nav-link active">Bookapedia Home</NavLink>
                     <div className="nav justify-content-end navbar-collapse" id="navbarNavAltMarkup">
                         <ul className="navbar-nav">
+                            {state.currentUser &&
                             <li className="nav-item">
                                 <NavLink to="/my-bookshelf" className="nav-link">My Bookshelf</NavLink>
+                            </li>
+                            }
+                            <li className="nav-item">
+                                <NavLink to="/book-randomizer" className="nav-link">Book Randomizer</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink to="/about" className="nav-link">About</NavLink>

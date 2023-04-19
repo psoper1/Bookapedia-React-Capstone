@@ -2,7 +2,7 @@ import React from 'react';
 import Nav from './Nav';
 import Logo from './Logo';
 import { useGlobalState } from "../src/context/GlobalState";
-import axios from 'axios';
+// import axios from 'axios';
 import request from './services/api.request';
 
 const BookDetails = ({ book }) => {
@@ -43,9 +43,11 @@ const BookDetails = ({ book }) => {
         <>
             <Nav />
             <Logo />
+            {state.currentUser &&
             <div className="text-center btnDiv">
                 <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
             </div>
+            }
             <div className="book-details">
                 <div key={book.id} className="cardPadding col-md-4">
                     <div className="details-card text-center">

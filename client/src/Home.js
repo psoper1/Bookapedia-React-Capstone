@@ -64,9 +64,9 @@ function Home({book, setBook, setView}) {
                                 <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
                                 <div className="card-body">
                                     <h5 className="card-title">{book.volumeInfo.title}</h5>
-                                    <p className="card-text">{book.volumeInfo.authors[0]}</p>
-                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].type}</p>
-                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].identifier}</p>
+                                    <p className="card-text">{book.volumeInfo.authors?.[0]}</p>
+                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
+                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
                                     <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink>
                                 </div>
                             </div>
