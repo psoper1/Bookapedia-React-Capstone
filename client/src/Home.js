@@ -40,6 +40,10 @@ function Home({book, setBook, setView}) {
         console.log(book)
       };
 
+    const handlePageReload = () => {
+        window.location.reload(false)
+    }
+
     return (
         <>
             <Nav setView={setView}/>
@@ -53,6 +57,7 @@ function Home({book, setBook, setView}) {
                         placeholder="Type here to search for a book! :)"
                     />
                     <button onClick={handleClick} className="btn" type="submit">Search</button>
+                    <button onClick={handlePageReload} className="btn">Reset Search</button>
                 </form>
             </div>
             <div className="results container text-center">

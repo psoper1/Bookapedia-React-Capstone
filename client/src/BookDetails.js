@@ -22,7 +22,6 @@ const BookDetails = ({ book }) => {
                     title: book.volumeInfo.title,
                     author: book.volumeInfo.authors[0],
                     description: book.volumeInfo.description,
-                    // genre: book.volumeInfo.categories[0],
                     date_published: book.volumeInfo.publishedDate,
                     marked_read: false,
                     image_link: book.volumeInfo.imageLinks?.smallThumbnail,

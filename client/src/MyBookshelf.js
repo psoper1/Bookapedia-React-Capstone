@@ -1,11 +1,10 @@
 // import Footer from "./Footer";
 import Logo from "./Logo";
 import Nav from "./Nav";
+import { NavLink } from "react-router-dom";
 import { useGlobalState } from "../src/context/GlobalState";
-// import axios from 'axios';
 import request from './services/api.request';
 import { useState, useEffect } from 'react';
-// import { NavLink } from "react-router-dom";
 
 function MyBookshelf({book, setBook}) {
     // eslint-disable-next-line
@@ -45,9 +44,31 @@ function MyBookshelf({book, setBook}) {
         } catch (error) {
             console.log(error);
         }
-        window.location.reload(false)
+        setData(data.filter(b => shelfBook.id !== b.id))
         console.log('clicked')
         console.log(shelfBook.id)
+    }
+
+    const handleRead = async (shelfBook) => {
+        console.log('in handleRead')
+        try {
+            let options = {
+                url: `books/${shelfBook.id}/`,
+                method: 'PATCH',
+                data: {
+                    marked_read: true
+                }
+            }
+            let response = await request(options)
+            console.log(response.data)
+            setData(response.data)
+        } catch (error) {
+            console.log(error);
+        }
+        setData(data.filter(b => shelfBook.id !== b.id))
+        console.log('clicked')
+        console.log(shelfBook.id)
+        window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
     }
 
 
@@ -67,9 +88,12 @@ function MyBookshelf({book, setBook}) {
                                 <div className="card-body">
                                     <h5 className="card-title">{shelfBook.title}</h5>
                                     <p className="card-text">{shelfBook.author}</p>
-                                    {/* <p className="card-text text-muted">{book.industryIdentifiers[0].type}</p>
-                            <p className="card-text text-muted">{book.industryIdentifiers[0].identifier}</p> */}
-                                    {/* <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink> */}
+                                    {!shelfBook.marked_read &&
+                                    <NavLink className="btn" onClick={() => handleRead(shelfBook)}>Mark Read</NavLink>
+                                    }
+                                    {shelfBook.marked_read &&
+                                        <NavLink className="btn">Read!</NavLink>
+                                    }
                                 </div>
                             </div>
                         </div>)}
