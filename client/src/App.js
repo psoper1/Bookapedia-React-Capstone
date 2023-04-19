@@ -23,7 +23,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/my-bookshelf" element={<MyBookshelf />} />
+            <Route path="/my-bookshelf" element={<MyBookshelf book={book} setBook={setBook} />} />
             <Route path="/chosen-book" element={<BookDetails book={book} />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/registration-success" element={<RegisterSuccess />} />

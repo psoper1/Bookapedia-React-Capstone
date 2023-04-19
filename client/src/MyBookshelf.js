@@ -7,7 +7,7 @@ import request from './services/api.request';
 import { useState, useEffect } from 'react';
 // import { NavLink } from "react-router-dom";
 
-function MyBookshelf() {
+function MyBookshelf({book, setBook}) {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
     const [data, setData] = useState([]);
@@ -33,8 +33,21 @@ function MyBookshelf() {
         // eslint-disable-next-line
     }, [])
 
-    const handleDelete = async () => {
+    const handleDelete = async (shelfBook) => {
+        try {
+            let options = {
+                url: `books/${shelfBook.id}`,
+                method: 'DELETE',
+            }
+            let response = await request(options)
+            console.log(response.data)
+            setData(response.data)
+        } catch (error) {
+            console.log(error);
+        }
+        window.location.reload(false)
         console.log('clicked')
+        console.log(shelfBook.id)
     }
 
 
@@ -47,7 +60,7 @@ function MyBookshelf() {
                     {data.map((shelfBook) =>
                         <div key={shelfBook.id} className="cardPadding col-md-4">
                             <div className="card text-center">
-                            <button className="delete-item" onClick={handleDelete}>
+                            <button className="delete-item" onClick={() => handleDelete(shelfBook)}>
                                 x
                             </button>
                                 <img className="cardImage card-img-top" src={shelfBook.image_link} alt="bookImage" />
