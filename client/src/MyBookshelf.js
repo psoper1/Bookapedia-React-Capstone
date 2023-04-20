@@ -6,7 +6,7 @@ import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
 import { useState, useEffect } from 'react';
 
-function MyBookshelf({ book, setBook }) {
+function MyBookshelf({ book, setBook, setShelfBook }) {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
     const [data, setData] = useState([]);
@@ -125,6 +125,12 @@ function MyBookshelf({ book, setBook }) {
         console.log(data)
     }
 
+    const handleBookClick = (shelfBook) => {
+        setShelfBook(shelfBook);
+        console.log('in handle book function')
+        console.log(shelfBook)
+      };
+
 
     return (
         <>
@@ -156,6 +162,7 @@ function MyBookshelf({ book, setBook }) {
                                             <NavLink className="btn" onClick={() => handleNotRead(shelfBook)}>Mark Unread</NavLink>
                                         </>
                                     }
+                                    <NavLink to="/bookshelf-book-details" className="btn stretched-link" onClick={() => handleBookClick(shelfBook)}>More Info</NavLink>
                                 </div>
                             </div>
                         </div>)}

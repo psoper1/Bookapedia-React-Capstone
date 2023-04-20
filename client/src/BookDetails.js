@@ -4,7 +4,7 @@ import Logo from './Logo';
 import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
 
-const BookDetails = ({ book }) => {
+const BookDetails = ({ book, shelfBook }) => {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
 
@@ -46,7 +46,8 @@ const BookDetails = ({ book }) => {
                 <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
             </div>
             }
-            <div className="book-details">
+            {book &&
+                <div className="book-details">
                 <div key={book.id} className="cardPadding col-md-4">
                     <div className="details-card text-center">
 
@@ -63,7 +64,7 @@ const BookDetails = ({ book }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>}
         </>
     );
 };

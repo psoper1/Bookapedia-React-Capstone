@@ -69,13 +69,17 @@ const WeeklyBook = () => {
     }, []);
 
     if (!book) {
-        return <div className="text-center">Loading...</div>;
+        return <div className="text-center">Loading Book of the Week...</div>;
     }
 
     return (
         <>
             <Nav />
             <Logo />
+            {/* {
+                !book &&
+                <div className="text-center">Loading...</div>
+            } */}
             <h1 className="text-center">Random Book of the Week</h1>
             {book && <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>}
             <div key={book.id} className="cardPadding col-md-4">

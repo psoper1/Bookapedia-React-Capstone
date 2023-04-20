@@ -11,9 +11,11 @@ import RegisterSuccess from "./RegisterSuccess";
 import LogoutPage from "./LogoutPage";
 import BookRandomizer from "./BookRandomizer";
 import WeeklyBook from "./WeeklyBook";
+import BookShelfDetails from "./BookShelfDetails";
 
 function App() {
   const [book, setBook] = useState(null)
+  const [shelfBook, setShelfBook] = useState(null)
   return (
     <>
         <Router basename="/">
@@ -22,13 +24,14 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/my-bookshelf" element={<MyBookshelf book={book} setBook={setBook} />} />
-            <Route path="/chosen-book" element={<BookDetails book={book} />} />
+            <Route path="/my-bookshelf" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook}/>} />
+            <Route path="/chosen-book" element={<BookDetails book={book} shelfBook={shelfBook}/>} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/registration-success" element={<RegisterSuccess />} />
             <Route path="/logged-out" element={<LogoutPage />} />
             <Route path="book-randomizer" element={<BookRandomizer />} />
             <Route path="/book-of-the-week" element={<WeeklyBook />} />
+            <Route path="/bookshelf-book-details" element={<BookShelfDetails shelfBook={shelfBook}/>} />
           </Routes>
         </Router>
     </>
