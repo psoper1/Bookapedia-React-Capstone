@@ -31,6 +31,9 @@ function LoginPage() {
                     currentUserToken: resp.access,
                     currentUser: data
                 })
+                console.log('after login')
+                console.log(data)
+                console.log('after login')
                 navigate('/')
             });
     }

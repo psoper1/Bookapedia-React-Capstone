@@ -46,7 +46,7 @@ function Home({book, setBook, setView, user}) {
 
     return (
         <>
-            <Nav setView={setView} user={user}/>
+            <Nav setView={setView} />
             <Logo />
             <div className="form-outline">
                 <form className="d-flex">

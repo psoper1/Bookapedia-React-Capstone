@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import request from './services/api.request';
 import { useEffect, useState } from 'react';
 
-function Nav({user}) {
+function Nav() {
     const [state, dispatch] = useGlobalState();
     const [data, setData] = useState();
     let navigate = useNavigate();
@@ -23,7 +23,7 @@ function Nav({user}) {
     const loadUser = async () => {
         try {
             let options = {
-                url: `users/${state.currentUser.id}`,
+                url: `users/${state.currentUser.user_id}/`,
                 method: 'GET',
             }
             let response = await request(options)
@@ -32,8 +32,6 @@ function Nav({user}) {
         } catch (error) {
             console.log(error);
         }
-        console.log('clicked')
-        console.log(state.currentUser.user_id)
     }
 
     useEffect(() => {
@@ -54,11 +52,12 @@ function Nav({user}) {
                                 <NavLink to="/book-of-the-week" className="nav-link">Check out the Book of the Week here!</NavLink>
                             </li>
                             {/* {console.log(user.firstName)} */}
-                            {state.currentUser &&
+                            {state.currentUser && data &&
                             <li className="nav-item">
                                 <NavLink to="/my-bookshelf" className="nav-link">{data.first_name}'s Bookshelf</NavLink>
                             </li>
                             }
+                            {/* {data.first_name} */}
                             <li className="nav-item">
                                 <NavLink to="/book-randomizer" className="nav-link">Book Randomizer</NavLink>
                             </li>

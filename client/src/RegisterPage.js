@@ -2,21 +2,22 @@ import Logo from "./Logo";
 import Nav from "./Nav";
 import athena from "../src/imgs/athena.webp";
 import AuthService from "../src/services/auth.service";
-// import { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import Footer from "./Footer";
-// import { useGlobalState } from "../src/context/GlobalState";
+import { useGlobalState } from "../src/context/GlobalState";
 
-const RegisterPage = ({user, setUser}) => {
-    // const [state, dispatch] = useGlobalState();
+const RegisterPage = () => {
+    // eslint-disable-next-line
+    const [state, dispatch] = useGlobalState();
     const navigate = useNavigate();
-    // const [user, setUser] = useState({
-    //     password: "",
-    //     passwordConf: "",
-    //     firstName: "",
-    //     lastName: "",
-    //     email: "",
-    // })
+    const [user, setUser] = useState({
+        password: "",
+        passwordConf: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+    })
 
     const handleChange = (key, value) => {
         setUser({
