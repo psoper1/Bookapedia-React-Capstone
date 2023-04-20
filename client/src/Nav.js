@@ -19,8 +19,9 @@ function Nav() {
             currentUser: null
         })
     }
-
+    
     const loadUser = async () => {
+        console.log(state.currentUser.user_id)
         try {
             let options = {
                 url: `users/${state.currentUser.user_id}/`,
@@ -29,8 +30,14 @@ function Nav() {
             let response = await request(options)
             console.log(response.data)
             setData(response.data)
-        } catch (error) {
-            console.log(error);
+        } 
+        catch (error) {
+            // console.log(error);
+            if (state.currentUser === null) {
+                
+            } else {
+                console.log(error)
+            }
         }
     }
 
@@ -51,7 +58,6 @@ function Nav() {
                             <li className="nav-item">
                                 <NavLink to="/book-of-the-week" className="nav-link">Check out the Book of the Week here!</NavLink>
                             </li>
-                            {/* {console.log(user.firstName)} */}
                             {state.currentUser && data &&
                             <li className="nav-item">
                                 <NavLink to="/my-bookshelf" className="nav-link">{data.first_name}'s Bookshelf</NavLink>

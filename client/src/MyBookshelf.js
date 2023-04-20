@@ -69,7 +69,7 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
         setData(data.filter(b => shelfBook.id !== b.id))
         // console.log('clicked')
         // console.log(shelfBook.id)
-        window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
+        // window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
     }
 
     const handleNotRead = async (shelfBook) => {
@@ -91,7 +91,7 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
         setData(data.filter(b => shelfBook.id !== b.id))
         // console.log('clicked')
         // console.log(shelfBook.id)
-        window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
+        // window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
     }
 
     const getRead = async () => {
