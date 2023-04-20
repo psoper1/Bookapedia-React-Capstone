@@ -35,8 +35,8 @@ const BookDetails = ({ book, shelfBook }) => {
         } catch (error) {
             console.log(error);
         }
-        console.log('clicked')
-        console.log(state.currentUser.user_id)
+        // console.log('clicked')
+        // console.log(state.currentUser.user_id)
         navigate('/my-bookshelf');
     }
 

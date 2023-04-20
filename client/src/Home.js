@@ -19,7 +19,7 @@ function Home({book, setBook, setView, user}) {
 
     useEffect(() => {
         if (document.getElementById('input').value === "") {
-            console.log('if statement')
+            // console.log('if statement')
         }
         else {
             fetchSearchResults();
@@ -36,8 +36,8 @@ function Home({book, setBook, setView, user}) {
 
     const handleBookClick = (book) => {
         setBook(book);
-        console.log('in handle book function')
-        console.log(book)
+        // console.log('in handle book function')
+        // console.log(book)
       };
 
     const handlePageReload = () => {

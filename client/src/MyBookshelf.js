@@ -23,8 +23,8 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
         } catch (error) {
             console.log(error);
         }
-        console.log('clicked')
-        console.log(state.currentUser.user_id)
+        // console.log('clicked')
+        // console.log(state.currentUser.user_id)
     }
 
     useEffect(() => {
@@ -46,8 +46,8 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             console.log(error);
         }
         // setData(data.filter(b => shelfBook.id !== b.id)) // you can use this line to replace line 43
-        console.log('clicked')
-        console.log(shelfBook.id)
+        // console.log('clicked')
+        // console.log(shelfBook.id)
     }
 
     const handleRead = async (shelfBook) => {
@@ -67,8 +67,8 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             console.log(error);
         }
         setData(data.filter(b => shelfBook.id !== b.id))
-        console.log('clicked')
-        console.log(shelfBook.id)
+        // console.log('clicked')
+        // console.log(shelfBook.id)
         window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
     }
 
@@ -89,8 +89,8 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             console.log(error);
         }
         setData(data.filter(b => shelfBook.id !== b.id))
-        console.log('clicked')
-        console.log(shelfBook.id)
+        // console.log('clicked')
+        // console.log(shelfBook.id)
         window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
     }
 
@@ -106,8 +106,8 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
         } catch (error) {
             console.log(error);
         }
-        console.log('clicked')
-        console.log(data)
+        // console.log('clicked')
+        // console.log(data)
     }
 
     const getUnread = async () => {
@@ -122,14 +122,14 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
         } catch (error) {
             console.log(error);
         }
-        console.log('clicked')
-        console.log(data)
+        // console.log('clicked')
+        // console.log(data)
     }
 
     const handleBookClick = (shelfBook) => {
         setShelfBook(shelfBook);
-        console.log('in handle book function')
-        console.log(shelfBook)
+        // console.log('in handle book function')
+        // console.log(shelfBook)
       };
 
 

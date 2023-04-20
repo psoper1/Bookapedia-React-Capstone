@@ -39,7 +39,7 @@ function Nav() {
         // eslint-disable-next-line
     }, [])
 
-    console.log(data)
+    // console.log(data)
 
     return (
         <>

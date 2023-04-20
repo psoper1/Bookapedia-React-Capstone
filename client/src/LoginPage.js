@@ -20,7 +20,7 @@ function LoginPage() {
     const [password, setPassword] = useState("");
 
     const handleLogin = (e) => {
-        console.log("clicked")
+        // console.log("clicked")
         e.preventDefault();
 
         AuthService
@@ -31,9 +31,9 @@ function LoginPage() {
                     currentUserToken: resp.access,
                     currentUser: data
                 })
-                console.log('after login')
-                console.log(data)
-                console.log('after login')
+                // console.log('after login')
+                // console.log(data)
+                // console.log('after login')
                 navigate('/')
             });
     }
