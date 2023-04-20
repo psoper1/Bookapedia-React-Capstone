@@ -4,7 +4,7 @@ import Nav from "./Nav";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-function Home({book, setBook, setView}) {
+function Home({book, setBook, setView, user}) {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [clicked, setClicked] = useState(false)
@@ -46,7 +46,7 @@ function Home({book, setBook, setView}) {
 
     return (
         <>
-            <Nav setView={setView}/>
+            <Nav setView={setView} user={user}/>
             <Logo />
             <div className="form-outline">
                 <form className="d-flex">

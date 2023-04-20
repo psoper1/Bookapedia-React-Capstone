@@ -2,9 +2,12 @@ import { NavLink } from "react-router-dom";
 import { useGlobalState } from "../src/context/GlobalState";
 import AuthService from "../src/services/auth.service";
 import { useNavigate } from 'react-router-dom';
+import request from './services/api.request';
+import { useEffect, useState } from 'react';
 
-function Nav() {
+function Nav({user}) {
     const [state, dispatch] = useGlobalState();
+    const [data, setData] = useState();
     let navigate = useNavigate();
 
     const handleLogout = (e) => {
@@ -17,6 +20,29 @@ function Nav() {
         })
     }
 
+    const loadUser = async () => {
+        try {
+            let options = {
+                url: `users/${state.currentUser.id}`,
+                method: 'GET',
+            }
+            let response = await request(options)
+            console.log(response.data)
+            setData(response.data)
+        } catch (error) {
+            console.log(error);
+        }
+        console.log('clicked')
+        console.log(state.currentUser.user_id)
+    }
+
+    useEffect(() => {
+        loadUser()
+        // eslint-disable-next-line
+    }, [])
+
+    console.log(data)
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light">
@@ -27,9 +53,10 @@ function Nav() {
                             <li className="nav-item">
                                 <NavLink to="/book-of-the-week" className="nav-link">Check out the Book of the Week here!</NavLink>
                             </li>
+                            {/* {console.log(user.firstName)} */}
                             {state.currentUser &&
                             <li className="nav-item">
-                                <NavLink to="/my-bookshelf" className="nav-link">My Bookshelf</NavLink>
+                                <NavLink to="/my-bookshelf" className="nav-link">{data.first_name}'s Bookshelf</NavLink>
                             </li>
                             }
                             <li className="nav-item">

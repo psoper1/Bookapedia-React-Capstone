@@ -2,22 +2,21 @@ import Logo from "./Logo";
 import Nav from "./Nav";
 import athena from "../src/imgs/athena.webp";
 import AuthService from "../src/services/auth.service";
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import Footer from "./Footer";
 // import { useGlobalState } from "../src/context/GlobalState";
 
-
-const RegisterPage = () => {
+const RegisterPage = ({user, setUser}) => {
     // const [state, dispatch] = useGlobalState();
     const navigate = useNavigate();
-    const [user, setUser] = useState({
-        password: "",
-        passwordConf: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-    })
+    // const [user, setUser] = useState({
+    //     password: "",
+    //     passwordConf: "",
+    //     firstName: "",
+    //     lastName: "",
+    //     email: "",
+    // })
 
     const handleChange = (key, value) => {
         setUser({
@@ -39,7 +38,7 @@ const RegisterPage = () => {
 
     return (
         <>
-            <Nav />
+            <Nav user={user} />
             <section className="vh-100">
                 <div className="container-fluid">
                     <div className="row">
@@ -55,6 +54,24 @@ const RegisterPage = () => {
                                 <form id="formstyle" onSubmit={handleRegister}>
 
                                     <h3 id="h3style" className="fw-normal mb-3 pb-3">Register</h3>
+
+                                    <div className="form-outline mb-4">
+                                        <input
+                                            type="text"
+                                            id="first_name"
+                                            className="form-control form-control-lg"
+                                            onChange={(e) => handleChange('firstName', e.target.value)} />
+                                        <label className="form-label" htmlFor="firstName">First Name</label>
+                                    </div>
+
+                                    <div className="form-outline mb-4">
+                                        <input
+                                            type="text"
+                                            id="last_name"
+                                            className="form-control form-control-lg"
+                                            onChange={(e) => handleChange('lastName', e.target.value)} />
+                                        <label className="form-label" htmlFor="lastName">Last Name</label>
+                                    </div>
 
                                     <div className="form-outline mb-4">
                                         <input
