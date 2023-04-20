@@ -27,7 +27,8 @@ const BookRandomizer = () => {
                     date_published: selectedBook.volumeInfo.publishedDate,
                     marked_read: false,
                     image_link: selectedBook.volumeInfo.imageLinks?.smallThumbnail,
-                    saved_by: state.currentUser.user_id
+                    saved_by: state.currentUser.user_id,
+                    preview_link: selectedBook.volumeInfo.previewLink
                 }
             }
             let response = await request(options)

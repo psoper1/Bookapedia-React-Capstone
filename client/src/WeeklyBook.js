@@ -27,7 +27,8 @@ const WeeklyBook = () => {
                     date_published: book.volumeInfo.publishedDate,
                     marked_read: false,
                     image_link: book.volumeInfo.imageLinks?.smallThumbnail,
-                    saved_by: state.currentUser.user_id
+                    saved_by: state.currentUser.user_id,
+                    preview_link: book.volumeInfo.previewLink
                 }
             }
             let response = await request(options)
