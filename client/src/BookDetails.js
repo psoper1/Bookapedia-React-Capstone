@@ -2,7 +2,6 @@ import React from 'react';
 import Nav from './Nav';
 import Logo from './Logo';
 import { useGlobalState } from "../src/context/GlobalState";
-// import axios from 'axios';
 import request from './services/api.request';
 
 const BookDetails = ({ book }) => {

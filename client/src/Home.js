@@ -56,8 +56,8 @@ function Home({book, setBook, setView}) {
                         type="text"
                         placeholder="Type here to search for a book! :)"
                     />
-                    <button onClick={handleClick} className="btn" type="submit">Search</button>
-                    <button onClick={handlePageReload} className="btn">Reset Search</button>
+                    <button onClick={handleClick} className="btn btn2" type="submit">Search</button>
+                    <button onClick={handlePageReload} className="btn btn2">Reset Search</button>
                 </form>
             </div>
             <div className="results container text-center">

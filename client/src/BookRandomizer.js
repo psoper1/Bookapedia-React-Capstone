@@ -22,7 +22,6 @@ const BookRandomizer = () => {
                     title: selectedBook.volumeInfo.title,
                     author: selectedBook.volumeInfo.authors[0],
                     description: selectedBook.volumeInfo.description,
-                    // genre: book.volumeInfo.categories[0],
                     date_published: selectedBook.volumeInfo.publishedDate,
                     marked_read: false,
                     image_link: selectedBook.volumeInfo.imageLinks?.smallThumbnail,

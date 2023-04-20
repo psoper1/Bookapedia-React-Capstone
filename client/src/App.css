@@ -6,7 +6,6 @@
 .card {
     width: 400px;
     flex-direction: row;
-    /* z-index: -1; */
 }
 
 .delete-item {
@@ -40,7 +39,7 @@
 }
 
 .results {
-    margin-left: 18%;
+    margin-left: 16%;
     margin-top: 4%;
     z-index: 0;
 }
@@ -78,6 +77,12 @@
 .btn {
     background-color: #FFF2CC;
     color: #000000;
+    margin-left: 3%;
+}
+.btn2 {
+    background-color: #FFF2CC;
+    color: #000000;
+    margin-left: 1%;
 }
 
 .btn:hover {

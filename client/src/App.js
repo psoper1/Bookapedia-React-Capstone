@@ -10,7 +10,7 @@ import Profile from "./Profile";
 import RegisterSuccess from "./RegisterSuccess";
 import LogoutPage from "./LogoutPage";
 import BookRandomizer from "./BookRandomizer";
-// import handleBookClick from "./Home";
+import WeeklyBook from "./WeeklyBook";
 
 function App() {
   const [book, setBook] = useState(null)
@@ -18,7 +18,6 @@ function App() {
     <>
         <Router basename="/">
           <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
             <Route path="/" element={<Home book={book} setBook={setBook} />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<LoginPage />} />
@@ -29,6 +28,7 @@ function App() {
             <Route path="/registration-success" element={<RegisterSuccess />} />
             <Route path="/logged-out" element={<LogoutPage />} />
             <Route path="book-randomizer" element={<BookRandomizer />} />
+            <Route path="/book-of-the-week" element={<WeeklyBook />} />
           </Routes>
         </Router>
     </>

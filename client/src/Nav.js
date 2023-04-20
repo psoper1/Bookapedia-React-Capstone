@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Nav() {
     const [state, dispatch] = useGlobalState();
-    // const [bookshelfClicked, setBookshelfClicked] = useState(false)
     let navigate = useNavigate();
 
     const handleLogout = (e) => {
@@ -25,6 +24,9 @@ function Nav() {
                     <NavLink to="/" className="nav-link active">Bookapedia Home</NavLink>
                     <div className="nav justify-content-end navbar-collapse" id="navbarNavAltMarkup">
                         <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <NavLink to="/book-of-the-week" className="nav-link">Check out the Book of the Week here!</NavLink>
+                            </li>
                             {state.currentUser &&
                             <li className="nav-item">
                                 <NavLink to="/my-bookshelf" className="nav-link">My Bookshelf</NavLink>
