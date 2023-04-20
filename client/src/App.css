@@ -99,11 +99,29 @@
     background-size: auto 100%;
 }
 
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus,
+.navbar-toggler {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
 @media (min-width: 1025px) {
     .h-custom-2 {
         height: 72%;
     }
 }
+
+@media (min-width: 1030px) {
+    .navbar-collapse {
+      display: block !important;
+      height: auto !important;
+      padding-bottom: 0;
+      overflow: visible !important;
+    }
+  }
 
 .fas {
     color: #709085
