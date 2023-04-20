@@ -16,8 +16,8 @@ function BookShelfDetails({shelfBook}) {
                             <p className="card-text">{shelfBook.author}</p>
                             {/* <p className="card-text text-muted">{shelfBook.volumeInfo.industryIdentifiers[0].type}</p>
                             <p className="card-text text-muted">{shelfBook.volumeInfo.industryIdentifiers[0].identifier}</p> */}
-                            {/* <p className="card-text">{shelfBook.volumeInfo.publisher}</p>
-                            <p className="card-text">{shelfBook.volumeInfo.publishedDate}</p> */}
+                            {/* <p className="card-text">{shelfBook.volumeInfo.publisher}</p> */}
+                            <p className="card-text">{shelfBook.date_published}</p>
                             <p className="card-text">{shelfBook.description}</p>
                             {shelfBook.preview_link &&
                                 <a href={shelfBook.preview_link}>Preview Book!</a>}

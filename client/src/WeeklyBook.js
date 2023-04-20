@@ -85,7 +85,9 @@ const WeeklyBook = () => {
                 <div className="text-center">Loading...</div>
             } */}
             <h1 className="text-center">Random Book of the Week</h1>
-            {book && <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>}
+            {book && <div className="text-center btnDiv">
+                <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
+            </div>}
             <div key={book.id} className="cardPadding col-md-4">
                 <div className="details-card text-center">
 
