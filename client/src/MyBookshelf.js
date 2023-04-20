@@ -40,11 +40,12 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             }
             let response = await request(options)
             console.log(response.data)
-            setData(response.data)
+            setData(data.filter(b => shelfBook.id !== b.id))
+            // setData(response.data)
         } catch (error) {
             console.log(error);
         }
-        setData(data.filter(b => shelfBook.id !== b.id))
+        // setData(data.filter(b => shelfBook.id !== b.id)) // you can use this line to replace line 43
         console.log('clicked')
         console.log(shelfBook.id)
     }
@@ -162,7 +163,7 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
                                             <NavLink className="btn" onClick={() => handleNotRead(shelfBook)}>Mark Unread</NavLink>
                                         </>
                                     }
-                                    <NavLink to="/bookshelf-book-details" className="btn stretched-link" onClick={() => handleBookClick(shelfBook)}>More Info</NavLink>
+                                    <NavLink to="/bookshelf-book-details" className="btn" onClick={() => handleBookClick(shelfBook)}>More Info</NavLink>
                                 </div>
                             </div>
                         </div>)}

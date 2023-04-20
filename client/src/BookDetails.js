@@ -3,10 +3,12 @@ import Nav from './Nav';
 import Logo from './Logo';
 import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
+import { useNavigate } from 'react-router-dom';
 
 const BookDetails = ({ book, shelfBook }) => {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
+    let navigate = useNavigate();
 
     const handleClick = async () => {
         try {
@@ -34,6 +36,7 @@ const BookDetails = ({ book, shelfBook }) => {
         }
         console.log('clicked')
         console.log(state.currentUser.user_id)
+        navigate('/my-bookshelf');
     }
 
 

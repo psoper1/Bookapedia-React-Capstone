@@ -4,11 +4,13 @@ import request from './services/api.request';
 import axios from 'axios';
 import Nav from './Nav';
 import Logo from './Logo';
+import { useNavigate } from 'react-router-dom';
 
 const WeeklyBook = () => {
     const [book, setBook] = useState(null);
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
+    let navigate = useNavigate();
 
     const handleClick = async () => {
         try {
@@ -35,6 +37,7 @@ const WeeklyBook = () => {
         }
         console.log('clicked')
         console.log(state.currentUser.user_id)
+        navigate('/my-bookshelf');
     }
 
     useEffect(() => {
