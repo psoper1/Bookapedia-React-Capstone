@@ -38,7 +38,7 @@ const WeeklyBook = () => {
     }
 
     useEffect(() => {
-        const fetchBook = async () => {
+        const fetchWeeklyBook = async () => {
             const response = await axios.get(
                 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction&maxResults=40'
             );
@@ -59,10 +59,10 @@ const WeeklyBook = () => {
             }
         };
 
-        fetchBook();
+        fetchWeeklyBook();
 
         const interval = setInterval(() => {
-            fetchBook();
+            fetchWeeklyBook();
         }, 604800000);
 
         return () => clearInterval(interval);
