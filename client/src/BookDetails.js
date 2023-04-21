@@ -51,7 +51,7 @@ const BookDetails = ({ book, shelfBook }) => {
             </div>
             }
             {book &&
-                <div className="book-details">
+                <div className="book-details text-center">
                 <div key={book.id} className="cardPadding col-md-4">
                     <div className="details-card text-center">
 

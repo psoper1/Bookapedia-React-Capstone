@@ -87,7 +87,7 @@ const WeeklyBook = () => {
             {book && state.currentUser && <div className="text-center btnDiv">
                 <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
             </div>}
-            <div key={book.id} className="cardPadding col-md-4">
+            <div key={book.id} className="weekly-book cardPadding col-md-4">
                 <div className="details-card text-center">
 
                     <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />

@@ -16,13 +16,6 @@ import BookShelfDetails from "./BookShelfDetails";
 function App() {
   const [book, setBook] = useState(null)
   const [shelfBook, setShelfBook] = useState(null)
-  // const [user, setUser] = useState({
-  //   password: "",
-  //   passwordConf: "",
-  //   firstName: "",
-  //   lastName: "",
-  //   email: "",
-  // })
   
   return (
     <>
@@ -33,6 +26,8 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/my-bookshelf" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook}/>} />
+            <Route path="/my-bookshelf/read" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook}/>} />
+            <Route path="/my-bookshelf/unread" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook}/>} />
             <Route path="/chosen-book" element={<BookDetails book={book} shelfBook={shelfBook}/>} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/registration-success" element={<RegisterSuccess />} />

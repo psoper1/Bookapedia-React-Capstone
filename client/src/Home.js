@@ -49,7 +49,7 @@ function Home({book, setBook, setView, user}) {
         <>
             <Nav setView={setView} />
             <Logo />
-            <div className="form-outline">
+            <div className="form-outline text-center">
                 <form className="d-flex">
                     <input
                         id="input"
@@ -65,7 +65,7 @@ function Home({book, setBook, setView, user}) {
                 <div className="row">
                     {clicked && searchResults.length === 0 && <p>Loading restuls or no results were found</p>}
                     {clicked && searchResults.map((book) =>
-                        <div key={book.id} className="cardPadding col-md-4">
+                        <div key={book.id} className="col cardPadding col-lg-4">
                             <div className="card text-center">
                                 <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
                                 <div className="card-body">

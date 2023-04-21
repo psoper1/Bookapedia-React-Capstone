@@ -4,7 +4,7 @@ function Logo() {
     return (
         <>
         
-            <img className="rounded mx-auto d-block" src={bookapedialogo} alt="bookapedialogo" />
+            <img className="img-fluid rounded mx-auto d-block" src={bookapedialogo} alt="bookapedialogo" />
         
         </>
     )

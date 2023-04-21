@@ -67,6 +67,7 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             console.log(error);
         }
         setData(data.filter(b => shelfBook.id !== b.id))
+        loadBookshelf()
         // console.log('clicked')
         // console.log(shelfBook.id)
         // window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
@@ -89,6 +90,7 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             console.log(error);
         }
         setData(data.filter(b => shelfBook.id !== b.id))
+        loadBookshelf()
         // console.log('clicked')
         // console.log(shelfBook.id)
         // window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
@@ -139,9 +141,12 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             <Logo />
             <div className="results container text-center">
                 <div className="text-center btnDiv">
-                    <button onClick={loadBookshelf} className="btn mybookshelfButton">Show All</button>
-                    <button onClick={getRead} className="btn mybookshelfButton">Read</button>
-                    <button onClick={getUnread} className="btn mybookShelfButton">Unread</button>
+                    {/* <button onClick={loadBookshelf} className="btn mybookshelfButton">Show All</button> */}
+                    <NavLink to="/my-bookshelf" onClick={loadBookshelf} className="btn bookshelfButton">Show All</NavLink>
+                    {/* <button onClick={getRead} className="btn mybookshelfButton">Read</button> */}
+                    <NavLink to="/my-bookshelf/read" onClick={getRead} className="btn bookshelfButton">Read</NavLink>
+                    {/* <button onClick={getUnread} className="btn mybookShelfButton">Unread</button> */}
+                    <NavLink to="/my-bookshelf/unread" onClick={getUnread} className="btn bookshelfButton">Unread</NavLink>
                 </div>
                 <div className="row">
                     {data.map((shelfBook) =>
