@@ -4,7 +4,7 @@ import Nav from './Nav';
 import Logo from './Logo';
 import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const BookRandomizer = () => {
   const [selectedBook, setSelectedBook] = useState(null);
@@ -58,7 +58,8 @@ const BookRandomizer = () => {
     <div>
     <div className="text-center btnDiv">
       <button className="btn bookshelfButton" onClick={getRandomBook}>Get Random Book</button>
-      {selectedBook && <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>}
+      {selectedBook && state.currentUser && <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>}
+      {selectedBook && !state.currentUser && <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>}
       </div>
       {selectedBook && (
         <div className="book-details">

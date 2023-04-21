@@ -4,7 +4,7 @@ import request from './services/api.request';
 import axios from 'axios';
 import Nav from './Nav';
 import Logo from './Logo';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const WeeklyBook = () => {
     const [book, setBook] = useState(null);
@@ -80,12 +80,11 @@ const WeeklyBook = () => {
         <>
             <Nav />
             <Logo />
-            {/* {
-                !book &&
-                <div className="text-center">Loading...</div>
-            } */}
             <h1 className="text-center">Random Book of the Week</h1>
-            {book && <div className="text-center btnDiv">
+            {book && !state.currentUser && <div className="text-center btnDiv">
+                <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>
+            </div>}
+            {book && state.currentUser && <div className="text-center btnDiv">
                 <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
             </div>}
             <div key={book.id} className="cardPadding col-md-4">

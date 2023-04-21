@@ -11,7 +11,7 @@ function About() {
             <div className="container">
                     <h3 className="text-center">
                         Bookapedia is a website that allows you to search through the vast amount of books from the Google Books API. Traverse a fresh modern UI,
-                        find books to purchase and save books to your own personal virtual bookshelf!
+                        find books to purchase and save books to your personal virtual bookshelf!
                         </h3> 
             </div>
             {/* <Footer /> */}

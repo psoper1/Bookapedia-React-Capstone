@@ -36,6 +36,7 @@ function Home({book, setBook, setView, user}) {
 
     const handleBookClick = (book) => {
         setBook(book);
+        console.log(book)
         // console.log('in handle book function')
         // console.log(book)
       };
