@@ -4,13 +4,15 @@ import Nav from './Nav';
 import Logo from './Logo';
 import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
+// eslint-disable-next-line
 import { NavLink, useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const BookRandomizer = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   // eslint-disable-next-line
   const [state, dispatch] = useGlobalState();
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const handleClick = async () => {
     try {
@@ -33,6 +35,7 @@ const BookRandomizer = () => {
       }
       let response = await request(options)
       console.log(response.data)
+      toast.success(`${selectedBook.volumeInfo.title} has been added to your Bookshelf!`)
     } catch (error) {
       console.log(error);
     }
@@ -51,40 +54,46 @@ const BookRandomizer = () => {
     setSelectedBook(selected);
   };
 
-  const handleModal = () => {
-    navigate('/my-bookshelf');
-  }
+  // const handleModal = () => {
+  //   navigate('/my-bookshelf');
+  // }
 
   return (
     <>
       <Nav />
+      <div>
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
+            </div>
       <Logo />
       <div>
         <div className="text-center btnDiv">
           <button className="btn bookshelfButton" onClick={getRandomBook}>Get Random Book</button>
           {selectedBook && state.currentUser &&
-            // <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
-            <>
-              <button type="button" onClick={handleClick} className="btn bookshelfButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Add to my Bookshelf!
-              </button>
-              <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="exampleModalLabel">Success!</h5>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                      {selectedBook.volumeInfo.title} has been added to your Bookshelf!
-                    </div>
-                    <div className="modal-footer">
-                      <button onClick={handleModal} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
+            <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
+            // <>
+            //   <button type="button" onClick={handleClick} className="btn bookshelfButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            //     Add to my Bookshelf!
+            //   </button>
+            //   <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            //     <div className="modal-dialog">
+            //       <div className="modal-content">
+            //         <div className="modal-header">
+            //           <h5 className="modal-title" id="exampleModalLabel">Success!</h5>
+            //           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            //         </div>
+            //         <div className="modal-body">
+            //           {selectedBook.volumeInfo.title} has been added to your Bookshelf!
+            //         </div>
+            //         <div className="modal-footer">
+            //           <button onClick={handleModal} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            //         </div>
+            //       </div>
+            //     </div>
+            //   </div>
+            // </>
           }
           {selectedBook && !state.currentUser && <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>}
         </div>

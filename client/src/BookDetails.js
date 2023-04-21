@@ -3,12 +3,13 @@ import Nav from './Nav';
 import Logo from './Logo';
 import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const BookDetails = ({ book, shelfBook }) => {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
 
     const handleClick = async () => {
         try {
@@ -32,6 +33,7 @@ const BookDetails = ({ book, shelfBook }) => {
             }
             let response = await request(options)
             console.log(response.data)
+            toast.success(`${book.volumeInfo.title} has been added to your Bookshelf!`)
         } catch (error) {
             console.log(error);
         }
@@ -40,45 +42,50 @@ const BookDetails = ({ book, shelfBook }) => {
         // navigate('/my-bookshelf');
     }
 
-    const handleModal = () => {
-        navigate('/my-bookshelf');
-    }
-
+    // const handleModal = () => {
+    //     navigate('/my-bookshelf');
+    // }
 
     return (
         <>
             <Nav />
+            <div>
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
+            </div>
             <Logo />
             {state.currentUser &&
-                // <div className="text-center btnDiv">
-                //     <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
-                // </div>
+                <div className="text-center btnDiv">
+                    <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
+                </div>
 
-                <>
-                    <div className="text-center btnDiv">
-                        <button type="button" onClick={handleClick} className="btn bookshelfButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Add to my Bookshelf!
-                        </button>
-                    </div>
+                // <>
+                //     <div className="text-center btnDiv">
+                //         <button type="button" onClick={handleClick} className="btn bookshelfButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                //             Add to my Bookshelf!
+                //         </button>
+                //     </div>
 
 
-                    <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-dialog">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title" id="exampleModalLabel">Success!</h5>
-                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div className="modal-body">
-                                    {book.volumeInfo.title} has been added to your Bookshelf!
-                                </div>
-                                <div className="modal-footer">
-                                    <button onClick={handleModal} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </>
+                //     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                //         <div className="modal-dialog">
+                //             <div className="modal-content">
+                //                 <div className="modal-header">
+                //                     <h5 className="modal-title" id="exampleModalLabel">Success!</h5>
+                //                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                //                 </div>
+                //                 <div className="modal-body">
+                //                     {book.volumeInfo.title} has been added to your Bookshelf!
+                //                 </div>
+                //                 <div className="modal-footer">
+                //                     <button onClick={handleModal} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     </div>
+                // </>
             }
             {book &&
                 <div className="book-details text-center">
