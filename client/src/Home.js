@@ -4,7 +4,7 @@ import Nav from "./Nav";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-function Home({book, setBook, setView, user}) {
+function Home({ book, setBook, setView, user }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [clicked, setClicked] = useState(false)
@@ -39,7 +39,7 @@ function Home({book, setBook, setView, user}) {
         console.log(book)
         // console.log('in handle book function')
         // console.log(book)
-      };
+    };
 
     const handlePageReload = () => {
         window.location.reload(false)
