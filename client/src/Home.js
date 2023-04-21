@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import Nav from "./Nav";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import SyncLoader from 'react-spinners/SyncLoader'
 
 function Home({ book, setBook, setView, user }) {
     const [searchQuery, setSearchQuery] = useState("");
@@ -45,6 +46,10 @@ function Home({ book, setBook, setView, user }) {
         window.location.reload(false)
     }
 
+    const override = {
+        justifyContent: "center"
+    }
+
     return (
         <>
             <Nav setView={setView} />
@@ -63,7 +68,11 @@ function Home({ book, setBook, setView, user }) {
             </div>
             <div className="results container text-center">
                 <div className="row">
-                    {clicked && searchResults.length === 0 && <p>Loading restuls or no results were found</p>}
+                    {clicked && searchResults.length === 0 && 
+                    <SyncLoader 
+                    color="#FFD966" 
+                    cssOverride={override}
+                    />}
                     {clicked && searchResults.map((book) =>
                         <div key={book.id} className="col cardPadding col-lg-4">
                             <div className="card text-center">
