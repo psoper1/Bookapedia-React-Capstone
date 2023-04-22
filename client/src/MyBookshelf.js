@@ -158,6 +158,10 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
                 <Toaster
                     position="top-center"
                     reverseOrder={false}
+                    toastOptions={{
+                        style: {
+                        background: '#fff6db'
+                    }}}
                 />
             </div>
             <Logo />

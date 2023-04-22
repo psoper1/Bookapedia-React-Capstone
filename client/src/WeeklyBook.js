@@ -98,6 +98,11 @@ const WeeklyBook = () => {
                 <Toaster
                     position="top-center"
                     reverseOrder={false}
+                    toastOptions={{
+                        style: {
+                            background: '#fff6db'
+                        }
+                    }}
                 />
             </div>
             <Logo />

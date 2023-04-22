@@ -22,11 +22,11 @@ function Home({ book, setBook, setView, user }) {
     const savedSearchResults = localStorage.getItem('searchResults');
     useEffect(() => {
         if (savedSearchResults) {
-          setSearchResults(JSON.parse(savedSearchResults));
+            setSearchResults(JSON.parse(savedSearchResults));
         }
         // eslint-disable-next-line
-      }, []);
-    
+    }, []);
+
     window.addEventListener('beforeunload', (event) => {
         if (event.persisted) {
             event.preventDefault();
@@ -85,11 +85,11 @@ function Home({ book, setBook, setView, user }) {
             </div>
             <div className="results container text-center">
                 <div className="row">
-                    {clicked && searchResults.length === 0 && 
-                    <SyncLoader 
-                    color="#FFD966" 
-                    cssOverride={override}
-                    />}
+                    {clicked && searchResults.length === 0 &&
+                        <SyncLoader
+                            color="#FFD966"
+                            cssOverride={override}
+                        />}
                     {clicked && searchResults.map((book) =>
                         <div key={book.id} className="col cardPadding col-lg-4">
                             <div className="card text-center">
@@ -117,11 +117,10 @@ function Home({ book, setBook, setView, user }) {
                                 </div>
                             </div>
                         </div>
-                        
+
                     )}
                 </div>
             </div>
-            
             {/* <Footer /> */}
 
         </>

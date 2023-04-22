@@ -5,7 +5,7 @@ import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
 // import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 const BookDetails = ({ book, shelfBook }) => {
     // eslint-disable-next-line
@@ -16,9 +16,9 @@ const BookDetails = ({ book, shelfBook }) => {
     useEffect(() => {
         const storedBooks = localStorage.getItem('bookshelf');
         if (storedBooks) {
-          setBooks(JSON.parse(storedBooks));
+            setBooks(JSON.parse(storedBooks));
         }
-      }, []);
+    }, []);
 
     const handleClick = async () => {
         const isDuplicate = books.find(newBook => newBook.title === book?.volumeInfo?.title);
@@ -65,6 +65,11 @@ const BookDetails = ({ book, shelfBook }) => {
                 <Toaster
                     position="top-center"
                     reverseOrder={false}
+                    toastOptions={{
+                        style: {
+                            background: '#fff6db'
+                        }
+                    }}
                 />
             </div>
             <Logo />

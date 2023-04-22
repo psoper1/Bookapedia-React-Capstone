@@ -62,11 +62,16 @@ const BookRandomizer = () => {
     <>
       <Nav />
       <div>
-                <Toaster
-                    position="top-center"
-                    reverseOrder={false}
-                />
-            </div>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            style: {
+              background: '#fff6db'
+            }
+          }}
+        />
+      </div>
       <Logo />
       <div>
         <div className="text-center btnDiv">
