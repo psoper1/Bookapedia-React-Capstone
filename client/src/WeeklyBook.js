@@ -4,8 +4,7 @@ import request from './services/api.request';
 import axios from 'axios';
 import Nav from './Nav';
 import Logo from './Logo';
-// eslint-disable-next-line
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import SyncLoader from 'react-spinners/SyncLoader'
 
@@ -13,36 +12,69 @@ const WeeklyBook = () => {
     const [book, setBook] = useState(null);
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
-    // let navigate = useNavigate();
+    const [books, setBooks] = useState();
 
-    const handleClick = async () => {
+    const loadBookshelf = async () => {
         try {
-            // going to edit - Josh
-            // it is utilizing the AuthService and some other cool axios features to 
-            // send your credentials of your logged in user to the backend.
             let options = {
-                url: 'save-book/', // because you have API_URL defined in api.constants, this just attaches to the end of it
-                method: 'POST', // This makes the request set up to be axios.post()
-                data: { // this is everything that you want to send to the backend
-                    title: book.volumeInfo.title,
-                    author: book.volumeInfo.authors[0],
-                    description: book.volumeInfo.description,
-                    date_published: book.volumeInfo.publishedDate,
-                    marked_read: false,
-                    image_link: book.volumeInfo.imageLinks?.smallThumbnail,
-                    saved_by: state.currentUser.user_id,
-                    preview_link: book.volumeInfo.previewLink
-                }
+                url: `my-books/`,
+                method: 'GET',
             }
             let response = await request(options)
             console.log(response.data)
-            toast.success(`${book.volumeInfo.title} has been added to your Bookshelf!`)
+            setBooks(response.data)
+            localStorage.setItem('bookshelf', JSON.stringify(response.data));
         } catch (error) {
             console.log(error);
         }
         // console.log('clicked')
         // console.log(state.currentUser.user_id)
-        // navigate('/my-bookshelf');
+    }
+
+    useEffect(() => {
+        loadBookshelf()
+        // eslint-disable-next-line
+    }, [])
+
+    useEffect(() => {
+        const storedBooks = localStorage.getItem('bookshelf');
+        if (storedBooks) {
+            setBooks(JSON.parse(storedBooks));
+        }
+    }, []);
+
+    const handleClick = async () => {
+        const isDuplicate = books.find(newBook => newBook.title === book?.volumeInfo?.title);
+        if (!isDuplicate) {
+            try {
+                let options = {
+                    url: 'save-book/',
+                    method: 'POST',
+                    data: {
+                        title: book.volumeInfo.title,
+                        author: book.volumeInfo.authors[0],
+                        description: book.volumeInfo.description,
+                        date_published: book.volumeInfo.publishedDate,
+                        marked_read: false,
+                        image_link: book.volumeInfo.imageLinks?.smallThumbnail,
+                        saved_by: state.currentUser.user_id,
+                        preview_link: book.volumeInfo.previewLink
+                    }
+                }
+                let response = await request(options)
+                console.log(response.data)
+                toast.success(`${book.volumeInfo.title} has been added to your Bookshelf!`)
+                loadBookshelf()
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            console.log("Book already exists");
+            toast.error(`${book?.volumeInfo?.title} is already in your Bookshelf!`)
+        }
+
+        // console.log('clicked')
+        // console.log(state.currentUser.user_id)
     }
 
     useEffect(() => {
@@ -86,10 +118,6 @@ const WeeklyBook = () => {
             cssOverride={override}
         /></div>;
     }
-
-    // const handleModal = () => {
-    //     navigate('/my-bookshelf');
-    // }
 
     return (
         <>

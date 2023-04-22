@@ -160,18 +160,16 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
                     reverseOrder={false}
                     toastOptions={{
                         style: {
-                        background: '#fff6db'
-                    }}}
+                            background: '#fff6db'
+                        }
+                    }}
                 />
             </div>
             <Logo />
             <div className="results container text-center">
                 <div className="text-center btnDiv">
-                    {/* <button onClick={loadBookshelf} className="btn mybookshelfButton">Show All</button> */}
                     <NavLink to="/my-bookshelf" onClick={loadBookshelf} className="btn bookshelfButton">Show All</NavLink>
-                    {/* <button onClick={getRead} className="btn mybookshelfButton">Read</button> */}
                     <NavLink to="/my-bookshelf/read" onClick={getRead} className="btn bookshelfButton">Read</NavLink>
-                    {/* <button onClick={getUnread} className="btn mybookShelfButton">Unread</button> */}
                     <NavLink to="/my-bookshelf/unread" onClick={getUnread} className="btn bookshelfButton">Unread</NavLink>
                 </div>
                 <div className="row">

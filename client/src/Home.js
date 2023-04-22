@@ -4,11 +4,36 @@ import Nav from "./Nav";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import SyncLoader from 'react-spinners/SyncLoader'
+import request from './services/api.request';
 
 function Home({ book, setBook, setView, user }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [clicked, setClicked] = useState(false)
+    // eslint-disable-next-line
+    const [data, setData] = useState([])
+
+    const loadBookshelf = async () => {
+        try {
+            let options = {
+                url: `my-books/`,
+                method: 'GET',
+            }
+            let response = await request(options)
+            console.log(response.data)
+            setData(response.data)
+            localStorage.setItem('bookshelf', JSON.stringify(response.data));
+        } catch (error) {
+            console.log(error);
+        }
+        // console.log('clicked')
+        // console.log(state.currentUser.user_id)
+    }
+
+    useEffect(() => {
+        loadBookshelf()
+        // eslint-disable-next-line
+    }, [])
 
     const fetchSearchResults = async () => {
         const response = await fetch(

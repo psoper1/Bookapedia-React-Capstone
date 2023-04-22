@@ -25,7 +25,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/my-bookshelf" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook}/>} />
+            <Route path="/my-bookshelf" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook} />} />
             <Route path="/my-bookshelf/read" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook}/>} />
             <Route path="/my-bookshelf/unread" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook}/>} />
             <Route path="/chosen-book" element={<BookDetails book={book} shelfBook={shelfBook}/>} />

@@ -1,44 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nav from './Nav';
 import Logo from './Logo';
 import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
-// eslint-disable-next-line
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
 const BookRandomizer = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   // eslint-disable-next-line
   const [state, dispatch] = useGlobalState();
-  // let navigate = useNavigate();
+  const [books, setBooks] = useState();
 
-  const handleClick = async () => {
+  //------------------------
+
+  const loadBookshelf = async () => {
     try {
-      // going to edit - Josh
-      // it is utilizing the AuthService and some other cool axios features to 
-      // send your credentials of your logged in user to the backend.
       let options = {
-        url: 'save-book/', // because you have API_URL defined in api.constants, this just attaches to the end of it
-        method: 'POST', // This makes the request set up to be axios.post()
-        data: { // this is everything that you want to send to the backend
-          title: selectedBook.volumeInfo.title,
-          author: selectedBook.volumeInfo.authors[0],
-          description: selectedBook.volumeInfo.description,
-          date_published: selectedBook.volumeInfo.publishedDate,
-          marked_read: false,
-          image_link: selectedBook.volumeInfo.imageLinks?.smallThumbnail,
-          saved_by: state.currentUser.user_id,
-          preview_link: selectedBook.volumeInfo.previewLink
-        }
+        url: `my-books/`,
+        method: 'GET',
       }
       let response = await request(options)
       console.log(response.data)
-      toast.success(`${selectedBook.volumeInfo.title} has been added to your Bookshelf!`)
+      setBooks(response.data)
+      localStorage.setItem('bookshelf', JSON.stringify(response.data));
     } catch (error) {
       console.log(error);
     }
+    // console.log('clicked')
+    // console.log(state.currentUser.user_id)
+  }
+
+  useEffect(() => {
+    loadBookshelf()
+    const storedBooks = localStorage.getItem('bookshelf');
+    if (storedBooks) {
+      setBooks(JSON.parse(storedBooks));
+    }
+    // eslint-disable-next-line
+  }, [])
+
+  const handleClick = async () => {
+    const isDuplicate = books.find(newBook => newBook.title === selectedBook.volumeInfo.title);
+    console.log(selectedBook.volumeInfo.title)
+    if (!isDuplicate) {
+      try {
+        let options = {
+          url: 'save-book/',
+          method: 'POST',
+          data: {
+            title: selectedBook.volumeInfo.title,
+            author: selectedBook.volumeInfo.authors[0],
+            description: selectedBook.volumeInfo.description,
+            date_published: selectedBook.volumeInfo.publishedDate,
+            marked_read: false,
+            image_link: selectedBook.volumeInfo.imageLinks?.smallThumbnail,
+            saved_by: state.currentUser.user_id,
+            preview_link: selectedBook.volumeInfo.previewLink
+          }
+        }
+        let response = await request(options)
+        console.log(response.data)
+        toast.success(`${selectedBook.volumeInfo.title} has been added to your Bookshelf!`)
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("Book already exists");
+      toast.error(`${selectedBook.volumeInfo.title} is already in your Bookshelf!`)
+    }
+    loadBookshelf();
+
     // console.log('clicked')
     // console.log(state.currentUser.user_id)
     // navigate('/my-bookshelf');
@@ -53,10 +86,6 @@ const BookRandomizer = () => {
     const selected = books[randomIndex];
     setSelectedBook(selected);
   };
-
-  // const handleModal = () => {
-  //   navigate('/my-bookshelf');
-  // }
 
   return (
     <>
@@ -78,27 +107,6 @@ const BookRandomizer = () => {
           <button className="btn bookshelfButton" onClick={getRandomBook}>Get Random Book</button>
           {selectedBook && state.currentUser &&
             <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
-            // <>
-            //   <button type="button" onClick={handleClick} className="btn bookshelfButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            //     Add to my Bookshelf!
-            //   </button>
-            //   <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            //     <div className="modal-dialog">
-            //       <div className="modal-content">
-            //         <div className="modal-header">
-            //           <h5 className="modal-title" id="exampleModalLabel">Success!</h5>
-            //           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            //         </div>
-            //         <div className="modal-body">
-            //           {selectedBook.volumeInfo.title} has been added to your Bookshelf!
-            //         </div>
-            //         <div className="modal-footer">
-            //           <button onClick={handleModal} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            //         </div>
-            //       </div>
-            //     </div>
-            //   </div>
-            // </>
           }
           {selectedBook && !state.currentUser && <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>}
         </div>

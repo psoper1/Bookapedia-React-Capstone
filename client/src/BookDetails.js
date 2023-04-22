@@ -3,14 +3,12 @@ import Nav from './Nav';
 import Logo from './Logo';
 import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
-// import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 
 const BookDetails = ({ book, shelfBook }) => {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
-    // let navigate = useNavigate();
     const [books, setBooks] = useState();
 
     useEffect(() => {
@@ -53,10 +51,6 @@ const BookDetails = ({ book, shelfBook }) => {
         // console.log(state.currentUser.user_id)
         // navigate('/my-bookshelf');
     }
-
-    // const handleModal = () => {
-    //     navigate('/my-bookshelf');
-    // }
 
     return (
         <>

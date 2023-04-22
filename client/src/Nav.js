@@ -18,6 +18,7 @@ function Nav() {
             currentUserToken: null,
             currentUser: null
         })
+        localStorage.removeItem("bookshelf");
     }
 
     const loadUser = async () => {
