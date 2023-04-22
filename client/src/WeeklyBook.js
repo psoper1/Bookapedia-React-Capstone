@@ -7,6 +7,7 @@ import Logo from './Logo';
 // eslint-disable-next-line
 import { NavLink, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import SyncLoader from 'react-spinners/SyncLoader'
 
 const WeeklyBook = () => {
     const [book, setBook] = useState(null);
@@ -75,8 +76,15 @@ const WeeklyBook = () => {
         return () => clearInterval(interval);
     }, []);
 
+    const override = {
+        justifyContent: "center"
+    }
+
     if (!book) {
-        return <div className="text-center">Loading Book of the Week...</div>;
+        return <div className="text-center" style={{ padding: "300px 0" }}><SyncLoader
+            color="#FFD966"
+            cssOverride={override}
+        /></div>;
     }
 
     // const handleModal = () => {
@@ -101,31 +109,6 @@ const WeeklyBook = () => {
                 <div className="text-center btnDiv">
                     <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
                 </div>
-                // <>
-                //     <div className="text-center btnDiv">
-                //         <button type="button" onClick={handleClick} className="btn bookshelfButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                //             Add to my Bookshelf!
-                //         </button>
-                //     </div>
-
-
-                //     <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                //         <div className="modal-dialog">
-                //             <div className="modal-content">
-                //                 <div className="modal-header">
-                //                     <h5 className="modal-title" id="exampleModalLabel">Success!</h5>
-                //                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                //                 </div>
-                //                 <div className="modal-body">
-                //                     {book.volumeInfo.title} has been added to your Bookshelf!
-                //                 </div>
-                //                 <div className="modal-footer">
-                //                     <button onClick={handleModal} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                //                 </div>
-                //             </div>
-                //         </div>
-                //     </div>
-                // </>
             }
             <div key={book.id} className="weekly-book cardPadding col-md-4">
                 <div className="details-card text-center">

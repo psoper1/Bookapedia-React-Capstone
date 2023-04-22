@@ -5,38 +5,50 @@ import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
 // import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import {useState, useEffect} from 'react';
 
 const BookDetails = ({ book, shelfBook }) => {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
     // let navigate = useNavigate();
+    const [books, setBooks] = useState();
+
+    useEffect(() => {
+        const storedBooks = localStorage.getItem('bookshelf');
+        if (storedBooks) {
+          setBooks(JSON.parse(storedBooks));
+        }
+      }, []);
 
     const handleClick = async () => {
-        try {
-            // going to edit - Josh
-            // This is the same thing as you have on lines 31-40 however
-            // it is utilizing the AuthService and some other cool axios features to 
-            // send your credentials of your logged in user to the backend.
-            let options = {
-                url: 'save-book/', // because you have API_URL defined in api.constants, this just attaches to the end of it
-                method: 'POST', // This makes the request set up to be axios.post()
-                data: { // this is everything that you want to send to the backend
-                    title: book.volumeInfo.title,
-                    author: book.volumeInfo.authors[0],
-                    description: book.volumeInfo.description,
-                    date_published: book.volumeInfo.publishedDate,
-                    marked_read: false,
-                    image_link: book.volumeInfo.imageLinks?.smallThumbnail,
-                    saved_by: state.currentUser.user_id,
-                    preview_link: book.volumeInfo.previewLink
+        const isDuplicate = books.find(newBook => newBook.title === book?.volumeInfo?.title);
+        if (!isDuplicate) {
+            try {
+                let options = {
+                    url: 'save-book/',
+                    method: 'POST',
+                    data: {
+                        title: book.volumeInfo.title,
+                        author: book.volumeInfo.authors[0],
+                        description: book.volumeInfo.description,
+                        date_published: book.volumeInfo.publishedDate,
+                        marked_read: false,
+                        image_link: book.volumeInfo.imageLinks?.smallThumbnail,
+                        saved_by: state.currentUser.user_id,
+                        preview_link: book.volumeInfo.previewLink
+                    }
                 }
+                let response = await request(options)
+                console.log(response.data)
+                toast.success(`${book.volumeInfo.title} has been added to your Bookshelf!`)
+            } catch (error) {
+                console.log(error);
             }
-            let response = await request(options)
-            console.log(response.data)
-            toast.success(`${book.volumeInfo.title} has been added to your Bookshelf!`)
-        } catch (error) {
-            console.log(error);
+        } else {
+            console.log("Book already exists");
+            toast.error(`${book?.volumeInfo?.title} is already in your Bookshelf!`)
         }
+
         // console.log('clicked')
         // console.log(state.currentUser.user_id)
         // navigate('/my-bookshelf');
@@ -60,32 +72,6 @@ const BookDetails = ({ book, shelfBook }) => {
                 <div className="text-center btnDiv">
                     <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
                 </div>
-
-                // <>
-                //     <div className="text-center btnDiv">
-                //         <button type="button" onClick={handleClick} className="btn bookshelfButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                //             Add to my Bookshelf!
-                //         </button>
-                //     </div>
-
-
-                //     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                //         <div className="modal-dialog">
-                //             <div className="modal-content">
-                //                 <div className="modal-header">
-                //                     <h5 className="modal-title" id="exampleModalLabel">Success!</h5>
-                //                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                //                 </div>
-                //                 <div className="modal-body">
-                //                     {book.volumeInfo.title} has been added to your Bookshelf!
-                //                 </div>
-                //                 <div className="modal-footer">
-                //                     <button onClick={handleModal} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                //                 </div>
-                //             </div>
-                //         </div>
-                //     </div>
-                // </>
             }
             {book &&
                 <div className="book-details text-center">

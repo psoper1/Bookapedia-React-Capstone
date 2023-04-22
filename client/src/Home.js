@@ -19,23 +19,12 @@ function Home({ book, setBook, setView, user }) {
         localStorage.setItem('searchResults', JSON.stringify(data.items));
     };
 
-    // function getSearchResultsFromLocalStorage() {
-    //     const searchResultsString = localStorage.getItem('searchResults');
-    //     if (searchResultsString) {
-    //       const searchResults = JSON.parse(searchResultsString);
-    //       if (searchResults !== null) {
-    //         return searchResults;
-    //       }
-    //     }
-    //     return null;
-    //   }
     const savedSearchResults = localStorage.getItem('searchResults');
     useEffect(() => {
-        // const savedSearchResults = localStorage.getItem('searchResults');
         if (savedSearchResults) {
           setSearchResults(JSON.parse(savedSearchResults));
         }
-        console.log(searchResults)
+        // eslint-disable-next-line
       }, []);
     
     window.addEventListener('beforeunload', (event) => {

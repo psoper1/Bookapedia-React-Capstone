@@ -10,6 +10,7 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
     const [data, setData] = useState([]);
+    const [books, setBooks] = useState([])
 
     const loadBookshelf = async () => {
         try {
@@ -20,6 +21,8 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             let response = await request(options)
             console.log(response.data)
             setData(response.data)
+            // add contents of bookshelf in to local storage
+            localStorage.setItem('bookshelf', JSON.stringify(response.data));
         } catch (error) {
             console.log(error);
         }
@@ -32,7 +35,23 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
         // eslint-disable-next-line
     }, [])
 
+    useEffect(() => {
+        const storedBooks = localStorage.getItem('bookshelf');
+        if (storedBooks) {
+          setBooks(JSON.parse(storedBooks));
+        }
+      }, []);
+
     const handleDelete = async (shelfBook) => {
+        const bookIndex = books.findIndex(book => book.title === shelfBook.title);
+    
+        if (bookIndex !== -1) {
+          const updatedBooks = [...books.slice(0, bookIndex), ...books.slice(bookIndex + 1)];
+          localStorage.setItem('bookshelf', JSON.stringify(updatedBooks));
+          setBooks(updatedBooks);
+        } else {
+          console.log('Book not found in the bookshelf');
+        }
         try {
             let options = {
                 url: `books/${shelfBook.id}`,
@@ -41,7 +60,6 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             let response = await request(options)
             console.log(response.data)
             setData(data.filter(b => shelfBook.id !== b.id))
-            // setData(response.data)
         } catch (error) {
             console.log(error);
         }
