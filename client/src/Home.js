@@ -16,7 +16,35 @@ function Home({ book, setBook, setView, user }) {
         );
         const data = await response.json();
         setSearchResults(data.items || []);
+        localStorage.setItem('searchResults', JSON.stringify(data.items));
     };
+
+    // function getSearchResultsFromLocalStorage() {
+    //     const searchResultsString = localStorage.getItem('searchResults');
+    //     if (searchResultsString) {
+    //       const searchResults = JSON.parse(searchResultsString);
+    //       if (searchResults !== null) {
+    //         return searchResults;
+    //       }
+    //     }
+    //     return null;
+    //   }
+    const savedSearchResults = localStorage.getItem('searchResults');
+    useEffect(() => {
+        // const savedSearchResults = localStorage.getItem('searchResults');
+        if (savedSearchResults) {
+          setSearchResults(JSON.parse(savedSearchResults));
+        }
+        console.log(searchResults)
+      }, []);
+    
+    window.addEventListener('beforeunload', (event) => {
+        if (event.persisted) {
+            event.preventDefault();
+            return;
+        }
+        localStorage.removeItem('searchResults');
+    })
 
     useEffect(() => {
         if (document.getElementById('input').value === "") {
@@ -87,8 +115,24 @@ function Home({ book, setBook, setView, user }) {
                             </div>
                         </div>
                     )}
+                    {searchResults && searchResults.map((book) =>
+                        <div key={book.id} className="col cardPadding col-lg-4">
+                            <div className="card text-center">
+                                <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
+                                <div className="card-body">
+                                    <h5 className="card-title">{book.volumeInfo.title}</h5>
+                                    <p className="card-text">{book.volumeInfo.authors?.[0]}</p>
+                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
+                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
+                                    <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    )}
                 </div>
             </div>
+            
             {/* <Footer /> */}
 
         </>
