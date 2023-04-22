@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
 import { useState, useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 function MyBookshelf({ book, setBook, setShelfBook }) {
     // eslint-disable-next-line
@@ -21,7 +22,6 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             let response = await request(options)
             console.log(response.data)
             setData(response.data)
-            // add contents of bookshelf in to local storage
             localStorage.setItem('bookshelf', JSON.stringify(response.data));
         } catch (error) {
             console.log(error);
@@ -38,19 +38,19 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
     useEffect(() => {
         const storedBooks = localStorage.getItem('bookshelf');
         if (storedBooks) {
-          setBooks(JSON.parse(storedBooks));
+            setBooks(JSON.parse(storedBooks));
         }
-      }, []);
+    }, []);
 
     const handleDelete = async (shelfBook) => {
         const bookIndex = books.findIndex(book => book.title === shelfBook.title);
-    
+
         if (bookIndex !== -1) {
-          const updatedBooks = [...books.slice(0, bookIndex), ...books.slice(bookIndex + 1)];
-          localStorage.setItem('bookshelf', JSON.stringify(updatedBooks));
-          setBooks(updatedBooks);
+            const updatedBooks = [...books.slice(0, bookIndex), ...books.slice(bookIndex + 1)];
+            localStorage.setItem('bookshelf', JSON.stringify(updatedBooks));
+            setBooks(updatedBooks);
         } else {
-          console.log('Book not found in the bookshelf');
+            console.log('Book not found in the bookshelf');
         }
         try {
             let options = {
@@ -60,10 +60,10 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
             let response = await request(options)
             console.log(response.data)
             setData(data.filter(b => shelfBook.id !== b.id))
+            toast.success(`${shelfBook.title} has been removed to your Bookshelf!`)
         } catch (error) {
             console.log(error);
         }
-        // setData(data.filter(b => shelfBook.id !== b.id)) // you can use this line to replace line 43
         // console.log('clicked')
         // console.log(shelfBook.id)
     }
@@ -88,7 +88,6 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
         loadBookshelf()
         // console.log('clicked')
         // console.log(shelfBook.id)
-        // window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
     }
 
     const handleNotRead = async (shelfBook) => {
@@ -111,7 +110,6 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
         loadBookshelf()
         // console.log('clicked')
         // console.log(shelfBook.id)
-        // window.location.reload(false);  // Doing this reload works but looks messy, noting this to change in the future
     }
 
     const getRead = async () => {
@@ -150,12 +148,18 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
         setShelfBook(shelfBook);
         // console.log('in handle book function')
         // console.log(shelfBook)
-      };
+    };
 
 
     return (
         <>
             <Nav />
+            <div>
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
+            </div>
             <Logo />
             <div className="results container text-center">
                 <div className="text-center btnDiv">
