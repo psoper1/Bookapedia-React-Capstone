@@ -6,7 +6,7 @@ import request from './services/api.request';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 
-const BookDetails = ({ book, shelfBook }) => {
+const BookDetails = ({ book, shelfBook, setLoggedIn }) => {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
     const [books, setBooks] = useState();
@@ -39,6 +39,14 @@ const BookDetails = ({ book, shelfBook }) => {
                 let response = await request(options)
                 console.log(response.data)
                 toast.success(`${book.volumeInfo.title} has been added to your Bookshelf!`)
+                let options2 = {
+                    url: `my-books/`,
+                    method: 'GET',
+                }
+                let response2 = await request(options2)
+                console.log(response2.data)
+                setBooks(response2.data)
+                localStorage.setItem('bookshelf', JSON.stringify(response2.data));
             } catch (error) {
                 console.log(error);
             }
@@ -54,7 +62,7 @@ const BookDetails = ({ book, shelfBook }) => {
 
     return (
         <>
-            <Nav />
+            <Nav setLoggedIn={setLoggedIn} />
             <div>
                 <Toaster
                     position="top-center"

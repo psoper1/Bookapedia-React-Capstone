@@ -1,10 +1,10 @@
 import Logo from "./Logo";
 import Nav from "./Nav";
 
-function BookShelfDetails({shelfBook}) {
+function BookShelfDetails({shelfBook, setLoggedIn}) {
     return (
         <>
-        <Nav />
+        <Nav setLoggedIn={setLoggedIn} />
         <Logo />
         <div className="book-details">
                 <div key={shelfBook.id} className="cardPadding col-md-4">

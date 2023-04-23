@@ -7,7 +7,7 @@ import request from './services/api.request';
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
-function MyBookshelf({ book, setBook, setShelfBook }) {
+function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
     const [data, setData] = useState([]);
@@ -153,7 +153,7 @@ function MyBookshelf({ book, setBook, setShelfBook }) {
 
     return (
         <>
-            <Nav />
+            <Nav setLoggedIn={setLoggedIn} />
             <div>
                 <Toaster
                     position="top-center"

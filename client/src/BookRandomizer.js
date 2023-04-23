@@ -7,7 +7,7 @@ import request from './services/api.request';
 import { NavLink } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
-const BookRandomizer = () => {
+const BookRandomizer = ({setLoggedIn}) => {
   const [selectedBook, setSelectedBook] = useState(null);
   // eslint-disable-next-line
   const [state, dispatch] = useGlobalState();
@@ -89,7 +89,7 @@ const BookRandomizer = () => {
 
   return (
     <>
-      <Nav />
+      <Nav setLoggedIn={setLoggedIn} />
       <div>
         <Toaster
           position="top-center"

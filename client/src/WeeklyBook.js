@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import SyncLoader from 'react-spinners/SyncLoader'
 
-const WeeklyBook = () => {
+const WeeklyBook = ({setLoggedIn}) => {
     const [book, setBook] = useState(null);
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
@@ -121,7 +121,7 @@ const WeeklyBook = () => {
 
     return (
         <>
-            <Nav />
+            <Nav setLoggedIn={setLoggedIn} />
             <div>
                 <Toaster
                     position="top-center"

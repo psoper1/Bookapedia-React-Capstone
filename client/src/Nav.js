@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import request from './services/api.request';
 import { useEffect, useState } from 'react';
 
-function Nav() {
+function Nav({setLoggedIn}) {
     const [state, dispatch] = useGlobalState();
     const [data, setData] = useState();
     let navigate = useNavigate();
@@ -13,11 +13,13 @@ function Nav() {
     const handleLogout = (e) => {
         e.preventDefault();
         AuthService.logout();
+        setLoggedIn(false)
         navigate('/logged-out');
         dispatch({
             currentUserToken: null,
             currentUser: null
         })
+        setLoggedIn(false)
         localStorage.removeItem("bookshelf");
     }
 
@@ -76,9 +78,11 @@ function Nav() {
                             {!state.currentUser && <li className="nav-item">
                                 <NavLink to="/login" className="nav-link">Log in</NavLink>
                             </li>}
-                            {state.currentUser && <><li className="nav-item">
+                            {state.currentUser && 
+                            <>
+                            {/* <li className="nav-item">
                                 <NavLink to="/profile" className="nav-link">Profile</NavLink>
-                            </li>
+                            </li> */}
                                 <li className="nav-item">
                                     <NavLink onClick={handleLogout} className="nav-link">Log out</NavLink>
                                 </li>

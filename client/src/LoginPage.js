@@ -2,7 +2,7 @@ import Logo from "./Logo";
 import Nav from "./Nav";
 import athena from "../src/imgs/athena.webp"
 import { NavLink } from "react-router-dom";
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import AuthService from "../src/services/auth.service";
 import { useNavigate } from 'react-router-dom';
 import { useGlobalState } from "../src/context/GlobalState";
@@ -11,7 +11,7 @@ import jwtDecode from "jwt-decode";
 
 
 
-function LoginPage() {
+function LoginPage({loggedIn, setLoggedIn}) {
     let navigate = useNavigate();
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
@@ -34,9 +34,20 @@ function LoginPage() {
                 // console.log('after login')
                 // console.log(data)
                 // console.log('after login')
-                navigate('/')
+                // navigate('/')
+                setLoggedIn(true)
             });
     }
+
+    useEffect(() => {
+        if (loggedIn) {
+        const timer = setTimeout(() => {
+          navigate('/');
+        }, 2000);
+        return () => clearTimeout(timer);
+    }
+      }, [navigate, loggedIn]);
+
     return (
         <>
             <Nav />
@@ -52,6 +63,7 @@ function LoginPage() {
 
                             <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
+                                {!loggedIn && 
                                 <form id="formstyle" onSubmit={handleLogin}>
 
                                     <h3 id="h3style" className="fw-normal mb-3 pb-3">Log in</h3>
@@ -88,7 +100,8 @@ function LoginPage() {
 
                                     <p>Don't have an account? <NavLink to="/register" className="link-secondary">Register here</NavLink></p>
 
-                                </form>
+                                </form>}
+                                {loggedIn && <div>Thank you for logging in! Redirecting to the Home page of Bookapedia!</div>}
 
                             </div>
 

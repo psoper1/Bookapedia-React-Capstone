@@ -2,10 +2,10 @@
 import Logo from "./Logo";
 import Nav from "./Nav";
 
-function About() {
+function About({setLoggedIn}) {
     return (
         <>
-            <Nav />
+            <Nav setLoggedIn={setLoggedIn} />
             <Logo />
             <h2 className="text-center">About Us</h2>
             <div className="container">

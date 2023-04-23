@@ -6,12 +6,14 @@ import { NavLink } from "react-router-dom";
 import SyncLoader from 'react-spinners/SyncLoader'
 import request from './services/api.request';
 
-function Home({ book, setBook, setView, user }) {
+function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [clicked, setClicked] = useState(false)
     // eslint-disable-next-line
     const [data, setData] = useState([])
+
+    console.log(loggedIn)
 
     const loadBookshelf = async () => {
         try {
@@ -85,7 +87,9 @@ function Home({ book, setBook, setView, user }) {
     };
 
     const handlePageReload = () => {
-        window.location.reload(false)
+        // window.location.reload(false)
+        localStorage.removeItem("searchResults")
+        setSearchResults("")
     }
 
     const override = {
@@ -94,7 +98,7 @@ function Home({ book, setBook, setView, user }) {
 
     return (
         <>
-            <Nav setView={setView} />
+            <Nav setView={setView} setLoggedIn={setLoggedIn} />
             <Logo />
             <div className="form-outline text-center">
                 <form className="d-flex">
