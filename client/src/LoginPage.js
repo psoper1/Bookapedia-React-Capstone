@@ -7,6 +7,7 @@ import AuthService from "../src/services/auth.service";
 import { useNavigate } from 'react-router-dom';
 import { useGlobalState } from "../src/context/GlobalState";
 import jwtDecode from "jwt-decode";
+import { Toaster } from 'react-hot-toast';
 // import Footer from "./Footer";
 
 
@@ -51,6 +52,15 @@ function LoginPage({loggedIn, setLoggedIn}) {
     return (
         <>
             <Nav />
+            <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            style: {
+              background: '#fff6db'
+            }
+          }}
+        />
             <section className="vh-100">
                 <div className="container-fluid">
                     <div className="row">

@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast';
+
 import {
     LOGIN_ENDPOINT,
     REFRESH_ENDPOINT,
@@ -26,6 +28,7 @@ import {
           return this.setToken(response);
         }
       } catch (error) {
+        toast.error('Username or password is incorrect, please try again.')
         return error.response;
       }
     }
