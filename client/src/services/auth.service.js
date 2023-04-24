@@ -25,6 +25,7 @@ import {
         });
   
         if (response.data.access) {
+          toast.success('Login successful!')
           return this.setToken(response);
         }
       } catch (error) {

@@ -134,7 +134,7 @@ const WeeklyBook = ({setLoggedIn}) => {
                 />
             </div>
             <Logo />
-            <h1 className="text-center">Random Book of the Week</h1>
+            <h1 className="text-center botw">Book of the Week</h1>
             {book && !state.currentUser && <div className="text-center btnDiv">
                 <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>
             </div>}

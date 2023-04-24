@@ -100,6 +100,7 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
 
     return (
         <>
+        {/* <div className="bgImage"> */}
             <Nav setView={setView} setLoggedIn={setLoggedIn} />
             <Logo />
             <div className="form-outline text-center">
@@ -154,6 +155,7 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
                     )}
                 </div>
             </div>
+            {/* </div> */}
             {/* <Footer /> */}
 
         </>

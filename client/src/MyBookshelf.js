@@ -153,6 +153,7 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
 
     return (
         <>
+        <div className="bgImage">
             <Nav setLoggedIn={setLoggedIn} />
             <div>
                 <Toaster
@@ -199,6 +200,7 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
                 </div>
             </div>
             {/* <Footer /> */}
+            </div>
         </>
     )
 }

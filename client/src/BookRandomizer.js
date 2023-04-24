@@ -102,8 +102,14 @@ const BookRandomizer = ({setLoggedIn}) => {
         />
       </div>
       <Logo />
-      <div>
+      <div className="container-fluid">
         <div className="text-center btnDiv">
+          {!selectedBook &&
+        <h4 className="text-center botw">Unsure of what to read next? Let us figure that out!</h4>
+          }
+          {selectedBook &&
+            <h4 className="text-center botw">Will it be this one?</h4>
+          }
           <button className="btn bookshelfButton" onClick={getRandomBook}>Get Random Book</button>
           {selectedBook && state.currentUser &&
             <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
@@ -111,8 +117,8 @@ const BookRandomizer = ({setLoggedIn}) => {
           {selectedBook && !state.currentUser && <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>}
         </div>
         {selectedBook && (
-          <div className="book-details">
-            <div key={selectedBook.id} className="cardPadding col-md-4">
+          <div className="book-details container-fluid">
+            <div key={selectedBook.id} className="cardPadding col-sm-12 col-md-6 col-lg-4">
               <div className="details-card text-center">
 
                 <img className="cardImage card-img-top" src={selectedBook.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
@@ -128,7 +134,7 @@ const BookRandomizer = ({setLoggedIn}) => {
                 </div>
               </div>
             </div>
-          </div>
+           </div>
         )}
       </div>
     </>
