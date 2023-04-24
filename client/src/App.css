@@ -69,6 +69,10 @@
 
 .card {
     background-color: #dfdad7;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
 }
 
 .cardImage {
