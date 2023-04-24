@@ -9,7 +9,8 @@ import request from './services/api.request';
 function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    const [clicked, setClicked] = useState(false)
+    const [clicked, setClicked] = useState(false);
+    const [inputText, setInputText] = useState("");
     // eslint-disable-next-line
     const [data, setData] = useState([])
 
@@ -87,9 +88,10 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
     };
 
     const handlePageReload = () => {
-        // window.location.reload(false)
-        localStorage.removeItem("searchResults")
-        setSearchResults("")
+        localStorage.removeItem('searchResults');
+        setSearchResults([])
+        setClicked(false)
+        setInputText("")
     }
 
     const override = {
@@ -107,6 +109,8 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
                         className="inputField form-control me-2"
                         type="text"
                         placeholder="Type here to search for a book! :)"
+                        value={inputText}
+                        onChange={(e) => setInputText(e.target.value)}
                     />
                     <button onClick={handleClick} className="btn btn2" type="submit">Search</button>
                     <button onClick={handlePageReload} className="btn btn2">Reset Search</button>

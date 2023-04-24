@@ -80,11 +80,11 @@ const BookDetails = ({ book, shelfBook, setLoggedIn }) => {
                     <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
                 </div>
             }
+            
             {book &&
                 <div className="book-details text-center">
                     <div key={book.id} className="cardPadding col-md-4">
                         <div className="details-card text-center">
-
                             <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
                             <div className="card-body">
                                 <h5 className="card-title">{book.volumeInfo.title}</h5>
