@@ -111,7 +111,7 @@ function LoginPage({loggedIn, setLoggedIn}) {
                                     <p>Don't have an account? <NavLink to="/register" className="link-secondary">Register here</NavLink></p>
 
                                 </form>}
-                                {loggedIn && <div>Thank you for logging in! Redirecting to the Home page of Bookapedia!</div>}
+                                {loggedIn && <div className="mx-auto">Thank you for logging in! Redirecting to the Home page of Bookapedia!</div>}
 
                             </div>
 

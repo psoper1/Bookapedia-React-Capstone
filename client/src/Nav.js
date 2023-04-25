@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import request from './services/api.request';
 import { useEffect, useState } from 'react';
 
-function Nav({setLoggedIn}) {
+function Nav({ loggedIn, setLoggedIn }) {
     const [state, dispatch] = useGlobalState();
     const [data, setData] = useState();
     let navigate = useNavigate();
@@ -19,7 +19,10 @@ function Nav({setLoggedIn}) {
             currentUserToken: null,
             currentUser: null
         })
-        // setLoggedIn(false)
+        if (loggedIn) {
+            setLoggedIn(false)
+        }
+        window.location.reload(true)
         localStorage.removeItem("bookshelf");
     }
 
@@ -54,7 +57,7 @@ function Nav({setLoggedIn}) {
         <>
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container-fluid">
-                    <NavLink to="/" className="nav-link active">Bookapedia Home</NavLink>
+                    <NavLink to="/" className="home-button nav-link active">Bookapedia Home</NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -78,15 +81,15 @@ function Nav({setLoggedIn}) {
                             {!state.currentUser && <li className="nav-item">
                                 <NavLink to="/login" className="nav-link">Log in</NavLink>
                             </li>}
-                            {state.currentUser && 
-                            <>
-                            {/* <li className="nav-item">
+                            {state.currentUser &&
+                                <>
+                                    {/* <li className="nav-item">
                                 <NavLink to="/profile" className="nav-link">Profile</NavLink>
                             </li> */}
-                                <li className="nav-item">
-                                    <NavLink onClick={handleLogout} className="nav-link">Log out</NavLink>
-                                </li>
-                            </>
+                                    <li className="nav-item">
+                                        <NavLink onClick={handleLogout} className="nav-link">Log out</NavLink>
+                                    </li>
+                                </>
                             }
                         </ul>
                     </div>

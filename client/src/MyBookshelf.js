@@ -6,6 +6,7 @@ import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import xbutton from '../src/imgs/x-button.png';
 
 function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
     // eslint-disable-next-line
@@ -182,21 +183,29 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
                                         <img className="card-image card-img-top" src={shelfBook.image_link} alt="bookImage" />
                                     </div>
                                     <div className="col-6">
-                                        <div className="card-body">
+                                        <div className="card-body d-flex flex-column">
                                             <h5 className="card-title">{shelfBook.title}</h5>
                                             <p className="card-text">{shelfBook.author}</p>
+                                            {shelfBook.marked_read &&
+                                            <p>Read!</p>
+                                            }
+                                            <div className="bookshelf-buttons">
                                             {!shelfBook.marked_read &&
-                                        <NavLink className="btn" onClick={() => handleRead(shelfBook)}>Mark Read</NavLink>
+                                        <NavLink className="btn btn-sm mark-read" onClick={() => handleRead(shelfBook)}>Mark Read</NavLink>
                                     }
                                     {shelfBook.marked_read &&
                                         <>
-                                            <NavLink className="btn">Read!</NavLink>
-                                            <NavLink className="btn" onClick={() => handleNotRead(shelfBook)}>Mark Unread</NavLink>
+                                            {/* <NavLink className="btn btn-sm read">Read!</NavLink> */}
+                                            <NavLink className="btn btn-sm mark-unread" onClick={() => handleNotRead(shelfBook)}>Mark Unread</NavLink>
                                         </>
                                     }
-                                    <NavLink to="/bookshelf-book-details" className="btn" onClick={() => handleBookClick(shelfBook)}>More Info</NavLink>
-                                            <button className="delete-item" onClick={() => handleDelete(shelfBook)}>
-                                                x
+                                    <NavLink to="/bookshelf-book-details" className="btn btn-sm more-info" onClick={() => handleBookClick(shelfBook)}>More Info</NavLink>
+                                            {/* <button className="random-button" onClick={() => handleDelete(shelfBook)}>
+                                                <img className="delete-item" src={xbutton} alt="delete"/>
+                                            </button> */}
+                                        </div>
+                                        <button className="random-button" onClick={() => handleDelete(shelfBook)}>
+                                                <img className="delete-item" src={xbutton} alt="delete"/>
                                             </button>
                                         </div>
                                     </div>

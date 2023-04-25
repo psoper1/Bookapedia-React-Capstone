@@ -140,12 +140,12 @@ const WeeklyBook = ({ setLoggedIn }) => {
                         <img className="details-card-image card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
                     </div>
                     <div className="flex-child text-center">
-                        <h5>{book.volumeInfo.title}</h5>
-                        <p>{book.volumeInfo.authors?.[0]}</p>
+                        <h5 className="card-title">{book.volumeInfo.title}</h5>
+                        <p>By {book.volumeInfo.authors?.[0]}</p>
                         <p className="text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
                         <p className="text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
                         <p>{book.volumeInfo.publishedDate}</p>
-                        <p>{book.volumeInfo.description}</p>
+                        <p className="card-paragraph">{book.volumeInfo.description}</p>
                         <a href={book.volumeInfo.previewLink}>Preview Book!</a>
                     </div>
                 </div>

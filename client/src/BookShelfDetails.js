@@ -12,10 +12,10 @@ function BookShelfDetails({shelfBook, setLoggedIn}) {
                         <img className="details-card-image card-img-top" src={shelfBook.image_link} alt="bookImage" />
                     </div>
                     <div className="flex-child text-center">
-                            <h5>{shelfBook.title}</h5>
+                            <h5 className="card-title">{shelfBook.title}</h5>
                             <p>{shelfBook.author}</p>
                             <p>{shelfBook.date_published}</p>
-                            <p>{shelfBook.description}</p>
+                            <p className="card-paragraph">{shelfBook.description}</p>
                             <a href={shelfBook.preview_link}>Preview Book!</a>
                     </div>
                 </div>
