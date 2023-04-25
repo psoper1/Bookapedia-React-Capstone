@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast';
+
 import {
     LOGIN_ENDPOINT,
     REFRESH_ENDPOINT,
@@ -11,21 +13,23 @@ import {
       this.login = this.login.bind(this);
     }
   
-    async login(username, password) {
+    async login(email, password) {  // changed from username to email since I am not using a username field for login
       try {
         const response = await request({
           url: LOGIN_ENDPOINT,
           method: 'POST',
           data: {
-            username,
+            email,
             password,
           },
         });
   
         if (response.data.access) {
+          toast.success('Login successful!')
           return this.setToken(response);
         }
       } catch (error) {
+        toast.error('Username or password is incorrect, please try again.')
         return error.response;
       }
     }
@@ -54,7 +58,7 @@ import {
           },
         });
   
-        await this.login(username, password);
+        await this.login(email, password);
       } catch (error) {
         return error.response;
       }
@@ -85,5 +89,5 @@ import {
       }
     }
   }
-  
+  // eslint-disable-next-line
   export default new AuthService();
