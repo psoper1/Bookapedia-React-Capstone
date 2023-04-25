@@ -1,6 +1,36 @@
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+    /* border: 2px solid yellow; */
+    height: 10%;
+}  
+
+.flex-child:first-child {
+    margin-right: 20px;
+}
+
+@media (max-width: 1217px) {
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .flex-child {
+        height: 2%;
+    }
+}
+
+.details-card-image {
+    max-height: 50%;
+    max-width: 50%;
+    margin-left: 25%;
+}
+
 .inputField {
-    width: 50%;
-    margin-left: 22%;
+    max-width: 600px;
+    /* margin-left: 22%; */
 }
 
 .book-details {
@@ -16,14 +46,37 @@
 }
 
 .card {
-    width: 400px;
-    flex-direction: row;
+    background-color: #dfdad7;
+    border: none;
+}
+
+.card > .row > .col-6 {
+    aspect-ratio: 2/3;
+}
+
+.card-image {
+    object-fit: cover;
+    height: 100%;
+}
+
+.card-title {
+    font-family: 'Cinzel', serif;
+}
+
+.cardPadding {
+    padding-bottom: 15px;
 }
 
 .delete-item {
     border: none;
     background: none;
     margin-bottom: 44%;
+    /* position: absolute; */
+    /* top: 5px; */
+    /* left: 5px; */
+    /* border: 2px solid black; */
+    /* border-radius: 40px; */
+    /* background: white; */
 }
 
 .footer {
@@ -100,7 +153,6 @@
 .details-card {
     width: 100%;
     flex-direction: row;
-    margin-left: 48%;
 }
 
 .results {
@@ -108,25 +160,6 @@
     margin-top: 4%;
     z-index: 0;
     /* background-color: #ddb99d; */
-}
-
-.card {
-    background-color: #dfdad7;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
-}
-
-.cardImage {
-    max-width: 200px;
-    max-height: 362px;
-    width: 150px;
-    height: 200px;
-}
-
-.cardPadding {
-    padding-bottom: 15px;
 }
 
 .about {
@@ -160,7 +193,7 @@
 .btn2 {
     background-color: #FFF2CC;
     color: #000000;
-    margin-left: 1%;
+    margin: 0 5px;
 }
 
 .btn:hover {

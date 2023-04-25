@@ -100,21 +100,25 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
 
     return (
         <>
-        {/* <div className="bgImage"> */}
+            {/* <div className="bgImage"> */}
             <Nav setView={setView} setLoggedIn={setLoggedIn} />
             <Logo />
-            <div className="form-outline text-center">
-                <form className="d-flex">
-                    <input
-                        id="input"
-                        className="inputField form-control me-2"
-                        type="text"
-                        placeholder="Type here to search for a book! :)"
-                        value={inputText}
-                        onChange={(e) => setInputText(e.target.value)}
-                    />
-                    <button onClick={handleClick} className="btn btn2" type="submit">Search</button>
-                    <button onClick={handlePageReload} className="btn btn2">Reset Search</button>
+            <div className="form-outline text-center container">
+                <form className="row justify-content-center">
+                    <div className="col-12">
+                        <input
+                            id="input"
+                            className="inputField form-control mx-auto mb-2"
+                            type="text"
+                            placeholder="Type here to search for a book! :)"
+                            value={inputText}
+                            onChange={(e) => setInputText(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-12 d-flex flex-row justify-content-center">
+                        <button onClick={handleClick} className="btn btn2" type="submit">Search</button>
+                        <button onClick={handlePageReload} className="btn btn2">Clear</button>
+                    </div>
                 </form>
             </div>
             <div className="results container text-center">
@@ -125,32 +129,44 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
                             cssOverride={override}
                         />}
                     {clicked && searchResults.map((book) =>
-                        <div key={book.id} className="col cardPadding col-lg-4">
+                        <div key={book.id} className="col-12 cardPadding col-lg-4">
                             <div className="card text-center">
-                                <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
-                                <div className="card-body">
-                                    <h5 className="card-title">{book.volumeInfo.title}</h5>
-                                    <p className="card-text">{book.volumeInfo.authors?.[0]}</p>
-                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
-                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
-                                    <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink>
+                                <div className="row g-0">
+                                    <div className="col-6">
+                                        <img className="card-image card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{book.volumeInfo.title}</h5>
+                                            <p className="card-text">{book.volumeInfo.authors?.[0]}</p>
+                                            <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
+                                            <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
+                                            <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     )}
                     {searchResults && searchResults.map((book) =>
-                        <div key={book.id} className="col cardPadding col-lg-4">
-                            <div className="card text-center">
-                                <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
-                                <div className="card-body">
-                                    <h5 className="card-title">{book.volumeInfo.title}</h5>
-                                    <p className="card-text">{book.volumeInfo.authors?.[0]}</p>
-                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
-                                    <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
-                                    <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink>
+                        <div key={book.id} className="col-12 cardPadding col-lg-4">
+                        <div className="card text-center">
+                            <div className="row g-0">
+                                <div className="col-6">
+                                    <img className="card-image card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
+                                </div>
+                                <div className="col-6">
+                                    <div className="card-body">
+                                        <h5 className="card-title">{book.volumeInfo.title}</h5>
+                                        <p className="card-text">{book.volumeInfo.authors?.[0]}</p>
+                                        <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
+                                        <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
+                                        <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                     )}
                 </div>

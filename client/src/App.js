@@ -6,7 +6,6 @@ import MyBookshelf from "./MyBookshelf";
 import Home from "./Home";
 import BookDetails from "./BookDetails";
 import { useState } from "react";
-// import Profile from "./Profile";
 import RegisterSuccess from "./RegisterSuccess";
 import LogoutPage from "./LogoutPage";
 import BookRandomizer from "./BookRandomizer";
@@ -14,9 +13,9 @@ import WeeklyBook from "./WeeklyBook";
 import BookShelfDetails from "./BookShelfDetails";
 
 function App() {
-  const [book, setBook] = useState(null)
-  const [shelfBook, setShelfBook] = useState(null)
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [book, setBook] = useState(null);
+  const [shelfBook, setShelfBook] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
   
   return (
     <>
@@ -29,12 +28,11 @@ function App() {
             <Route path="/my-bookshelf" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook} setLoggedIn={setLoggedIn} />} />
             <Route path="/my-bookshelf/read" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook}/>} setLoggedIn={setLoggedIn} />
             <Route path="/my-bookshelf/unread" element={<MyBookshelf book={book} setBook={setBook} setShelfBook={setShelfBook}/>} setLoggedIn={setLoggedIn} />
-            <Route path="/chosen-book" element={<BookDetails book={book} shelfBook={shelfBook}/>} setLoggedIn={setLoggedIn} />
-            {/* <Route path="/profile" element={<Profile />} /> */}
+            <Route path="/chosen-book" element={<BookDetails book={book} shelfBook={shelfBook}/>} setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
             <Route path="/registration-success" element={<RegisterSuccess />} />
             <Route path="/logged-out" element={<LogoutPage />} />
-            <Route path="book-randomizer" element={<BookRandomizer setLoggedIn={setLoggedIn} />} />
-            <Route path="/book-of-the-week" element={<WeeklyBook setLoggedIn={setLoggedIn} />} />
+            <Route path="book-randomizer" element={<BookRandomizer setLoggedIn={setLoggedIn} loggedIn={{loggedIn}} />} />
+            <Route path="/book-of-the-week" element={<WeeklyBook />} />
             <Route path="/bookshelf-book-details" element={<BookShelfDetails shelfBook={shelfBook}/>} setLoggedIn={setLoggedIn} />
           </Routes>
         </Router>

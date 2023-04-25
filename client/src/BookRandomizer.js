@@ -7,7 +7,7 @@ import request from './services/api.request';
 import { NavLink } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
-const BookRandomizer = ({setLoggedIn}) => {
+const BookRandomizer = ({setLoggedIn, loggedIn}) => {
   const [selectedBook, setSelectedBook] = useState(null);
   // eslint-disable-next-line
   const [state, dispatch] = useGlobalState();
@@ -87,6 +87,8 @@ const BookRandomizer = ({setLoggedIn}) => {
     setSelectedBook(selected);
   };
 
+  console.log(loggedIn)
+
   return (
     <>
       <Nav setLoggedIn={setLoggedIn} />
@@ -117,23 +119,39 @@ const BookRandomizer = ({setLoggedIn}) => {
           {selectedBook && !state.currentUser && <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>}
         </div>
         {selectedBook && (
-          <div className="book-details container-fluid">
-            <div key={selectedBook.id} className="cardPadding col-sm-12 col-md-6 col-lg-4">
-              <div className="details-card text-center">
+          // <div className="book-details container-fluid">
+          //   <div key={selectedBook.id} className="cardPadding col-sm-12 col-md-6 col-lg-4 mx-auto">
+          //     <div className="details-card text-center">
 
-                <img className="cardImage card-img-top" src={selectedBook.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
-                <div className="card-body">
-                  <h5 className="card-title">{selectedBook.volumeInfo.title}</h5>
-                  <p className="card-text">{selectedBook.volumeInfo.authors[0]}</p>
-                  <p className="card-text text-muted">{selectedBook.volumeInfo.industryIdentifiers[0].type}</p>
-                  <p className="card-text text-muted">{selectedBook.volumeInfo.industryIdentifiers[0].identifier}</p>
-                  <p className="card-text">{selectedBook.volumeInfo.publisher}</p>
-                  <p className="card-text">{selectedBook.volumeInfo.publishedDate}</p>
-                  <p className="card-text">{selectedBook.volumeInfo.description}</p>
-                  <a href={selectedBook.volumeInfo.previewLink}>Preview Book!</a>
-                </div>
-              </div>
-            </div>
+          //       <img className="cardImage card-img-top" src={selectedBook.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
+          //       <div className="card-body">
+          //         <h5 className="card-title">{selectedBook.volumeInfo.title}</h5>
+          //         <p className="card-text">{selectedBook.volumeInfo.authors[0]}</p>
+          //         <p className="card-text text-muted">{selectedBook.volumeInfo.industryIdentifiers[0].type}</p>
+          //         <p className="card-text text-muted">{selectedBook.volumeInfo.industryIdentifiers[0].identifier}</p>
+          //         <p className="card-text">{selectedBook.volumeInfo.publisher}</p>
+          //         <p className="card-text">{selectedBook.volumeInfo.publishedDate}</p>
+          //         <p className="card-text">{selectedBook.volumeInfo.description}</p>
+          //         <a href={selectedBook.volumeInfo.previewLink}>Preview Book!</a>
+          //       </div>
+          //     </div>
+          //   </div>
+          //  </div>
+           <div className="container">
+           <div className="flex-container">
+               <div className="flex-child">
+                   <img className="details-card-image card-img-top" src={selectedBook.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
+               </div>
+               <div className="flex-child text-center">
+                       <h5>{selectedBook.volumeInfo.title}</h5>
+                       <p>{selectedBook.volumeInfo.authors?.[0]}</p>
+                       <p className="text-muted">{selectedBook.volumeInfo.industryIdentifiers?.[0].type}</p>
+                       <p className="text-muted">{selectedBook.volumeInfo.industryIdentifiers?.[0].identifier}</p>
+                       <p>{selectedBook.volumeInfo.publishedDate}</p>
+                       <p>{selectedBook.volumeInfo.description}</p>
+                       <a href={selectedBook.volumeInfo.previewLink}>Preview Book!</a>
+               </div>
+           </div>
            </div>
         )}
       </div>

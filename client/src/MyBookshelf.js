@@ -153,38 +153,39 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
 
     return (
         <>
-        <div className="bgImage">
-            <Nav setLoggedIn={setLoggedIn} />
-            <div>
-                <Toaster
-                    position="top-center"
-                    reverseOrder={false}
-                    toastOptions={{
-                        style: {
-                            background: '#fff6db'
-                        }
-                    }}
-                />
-            </div>
-            <Logo />
-            <div className="results container text-center">
-                <div className="text-center btnDiv">
-                    <NavLink to="/my-bookshelf" onClick={loadBookshelf} className="btn bookshelfButton">Show All</NavLink>
-                    <NavLink to="/my-bookshelf/read" onClick={getRead} className="btn bookshelfButton">Read</NavLink>
-                    <NavLink to="/my-bookshelf/unread" onClick={getUnread} className="btn bookshelfButton">Unread</NavLink>
+            <div className="bgImage">
+                <Nav setLoggedIn={setLoggedIn} />
+                <div>
+                    <Toaster
+                        position="top-center"
+                        reverseOrder={false}
+                        toastOptions={{
+                            style: {
+                                background: '#fff6db'
+                            }
+                        }}
+                    />
                 </div>
-                <div className="row">
-                    {data.map((shelfBook) =>
-                        <div key={shelfBook.id} className="cardPadding col-md-4">
+                <Logo />
+                <div className="results container text-center">
+                    <div className="text-center btnDiv">
+                        <NavLink to="/my-bookshelf" onClick={loadBookshelf} className="btn bookshelfButton">Show All</NavLink>
+                        <NavLink to="/my-bookshelf/read" onClick={getRead} className="btn bookshelfButton">Read</NavLink>
+                        <NavLink to="/my-bookshelf/unread" onClick={getUnread} className="btn bookshelfButton">Unread</NavLink>
+                    </div>
+                    <div className="row">
+                        {data.map((shelfBook) =>
+                        <div key={shelfBook.id} className="col-12 cardPadding col-lg-4">
                             <div className="card text-center">
-                                <button className="delete-item" onClick={() => handleDelete(shelfBook)}>
-                                    x
-                                </button>
-                                <img className="cardImage card-img-top" src={shelfBook.image_link} alt="bookImage" />
-                                <div className="card-body">
-                                    <h5 className="card-title">{shelfBook.title}</h5>
-                                    <p className="card-text">{shelfBook.author}</p>
-                                    {!shelfBook.marked_read &&
+                                <div className="row g-0">
+                                    <div className="col-6">
+                                        <img className="card-image card-img-top" src={shelfBook.image_link} alt="bookImage" />
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{shelfBook.title}</h5>
+                                            <p className="card-text">{shelfBook.author}</p>
+                                            {!shelfBook.marked_read &&
                                         <NavLink className="btn" onClick={() => handleRead(shelfBook)}>Mark Read</NavLink>
                                     }
                                     {shelfBook.marked_read &&
@@ -194,12 +195,17 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
                                         </>
                                     }
                                     <NavLink to="/bookshelf-book-details" className="btn" onClick={() => handleBookClick(shelfBook)}>More Info</NavLink>
+                                            <button className="delete-item" onClick={() => handleDelete(shelfBook)}>
+                                                x
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>)}
+                    </div>
                 </div>
-            </div>
-            {/* <Footer /> */}
+                {/* <Footer /> */}
             </div>
         </>
     )

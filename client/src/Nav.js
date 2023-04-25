@@ -13,13 +13,13 @@ function Nav({setLoggedIn}) {
     const handleLogout = (e) => {
         e.preventDefault();
         AuthService.logout();
-        setLoggedIn(false)
+        // setLoggedIn(false)
         navigate('/logged-out');
         dispatch({
             currentUserToken: null,
             currentUser: null
         })
-        setLoggedIn(false)
+        // setLoggedIn(false)
         localStorage.removeItem("bookshelf");
     }
 

@@ -6,7 +6,7 @@ import request from './services/api.request';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 
-const BookDetails = ({ book, shelfBook, setLoggedIn }) => {
+const BookDetails = ({ book, shelfBook, setLoggedIn, loggedIn}) => {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
     const [books, setBooks] = useState();
@@ -60,6 +60,8 @@ const BookDetails = ({ book, shelfBook, setLoggedIn }) => {
         // navigate('/my-bookshelf');
     }
 
+    console.log(loggedIn)
+
     return (
         <>
             <Nav setLoggedIn={setLoggedIn} />
@@ -80,25 +82,24 @@ const BookDetails = ({ book, shelfBook, setLoggedIn }) => {
                     <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
                 </div>
             }
-            
             {book &&
-                <div className="book-details text-center">
-                    <div key={book.id} className="cardPadding col-md-4">
-                        <div className="details-card text-center">
-                            <img className="cardImage card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
-                            <div className="card-body">
-                                <h5 className="card-title">{book.volumeInfo.title}</h5>
-                                <p className="card-text">{book.volumeInfo.authors[0]}</p>
-                                <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].type}</p>
-                                <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].identifier}</p>
-                                <p className="card-text">{book.volumeInfo.publisher}</p>
-                                <p className="card-text">{book.volumeInfo.publishedDate}</p>
-                                <p className="card-text">{book.volumeInfo.description}</p>
-                                <a href={book.volumeInfo.previewLink}>Preview Book!</a>
-                            </div>
-                        </div>
+            <div className="container">
+                <div className="flex-container">
+                    <div className="flex-child">
+                        <img className="details-card-image card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
                     </div>
-                </div>}
+                    <div className="flex-child text-center">
+                            <h5>{book.volumeInfo.title}</h5>
+                            <p>{book.volumeInfo.authors?.[0]}</p>
+                            <p className="text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
+                            <p className="text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
+                            <p>{book.volumeInfo.publishedDate}</p>
+                            <p>{book.volumeInfo.description}</p>
+                            <a href={book.volumeInfo.previewLink}>Preview Book!</a>
+                    </div>
+                </div>
+                </div>
+                }
         </>
     );
 };
