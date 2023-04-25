@@ -71,7 +71,7 @@ function LoginPage({loggedIn, setLoggedIn}) {
                                 <Logo />
                             </div>
 
-                            <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+                            <div className="container d-flex mx-auto mb-2">
 
                                 {!loggedIn && 
                                 <form id="formstyle" onSubmit={handleLogin}>
@@ -86,9 +86,10 @@ function LoginPage({loggedIn, setLoggedIn}) {
                                             name="email"
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
+                                            placeholder="Email Address"
                                         />
 
-                                        <label className="form-label" htmlFor="email">Email address</label>
+                                        <label className="form-label" htmlFor="email"></label>
                                     </div>
 
                                     <div className="form-outline mb-4">
@@ -99,9 +100,10 @@ function LoginPage({loggedIn, setLoggedIn}) {
                                             name="password"
                                             onChange={(e) => setPassword(e.target.value)}
                                             required
+                                            placeholder="Password"
                                         />
 
-                                        <label className="form-label" htmlFor="password">Password</label>
+                                        <label className="form-label" htmlFor="password"></label>
                                     </div>
 
                                     <div className="pt-1 mb-4">

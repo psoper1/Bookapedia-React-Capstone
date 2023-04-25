@@ -4,6 +4,7 @@ import AuthService from "../src/services/auth.service";
 import { useNavigate } from 'react-router-dom';
 import request from './services/api.request';
 import { useEffect, useState } from 'react';
+import { toast } from "react-hot-toast";
 
 function Nav({ loggedIn, setLoggedIn }) {
     const [state, dispatch] = useGlobalState();
@@ -19,6 +20,7 @@ function Nav({ loggedIn, setLoggedIn }) {
             currentUserToken: null,
             currentUser: null
         })
+        toast.success("Successfully logged out")
         if (loggedIn) {
             setLoggedIn(false)
         }

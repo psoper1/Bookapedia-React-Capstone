@@ -1,12 +1,43 @@
 import Nav from "./Nav";
 import athena from "../src/imgs/athena.webp";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast, Toaster } from "react-hot-toast";
 
 function RegisterSuccess() {
+
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            toast.success("Registration success!")
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            navigate('/login');
+        }, 4000);
+        return () => clearTimeout(timer);
+        // eslint-disable-next-line
+    }, [])
+
+
     return (
         <>
             <Nav />
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                toastOptions={{
+                    style: {
+                        background: '#fff6db'
+                    }
+                }}
+            />
             <section className="vh-100">
                 <div className="container-fluid">
                     <div className="row">
@@ -16,7 +47,7 @@ function RegisterSuccess() {
                                 <Logo />
                             </div>
                             <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-                                <h3 id="h3style" className="fw-normal mb-3 pb-3">Thank you for registering! Click <NavLink to="/login">here</NavLink> to continue to log in!</h3>
+                                <h3 id="h3style" className="fw-normal mb-3 pb-3">Thank you for registering! Routing you back to the login page to login!</h3>
                             </div>
 
                         </div>
