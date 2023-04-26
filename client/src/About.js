@@ -1,4 +1,3 @@
-// import Footer from "./Footer";
 import Logo from "./Logo";
 import Nav from "./Nav";
 
@@ -21,7 +20,6 @@ function About({ setLoggedIn }) {
                 </h3>
 
             </div>
-            {/* <Footer /> */}
         </>
     )
 }

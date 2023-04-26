@@ -27,21 +27,7 @@ const WeeklyBook = ({ setLoggedIn }) => {
         } catch (error) {
             console.log(error);
         }
-        // console.log('clicked')
-        // console.log(state.currentUser.user_id)
     }
-
-    useEffect(() => {
-        loadBookshelf()
-        // eslint-disable-next-line
-    }, [])
-
-    useEffect(() => {
-        const storedBooks = localStorage.getItem('bookshelf');
-        if (storedBooks) {
-            setBooks(JSON.parse(storedBooks));
-        }
-    }, []);
 
     const handleClick = async () => {
         const isDuplicate = books.find(newBook => newBook.title === book?.volumeInfo?.title);
@@ -72,12 +58,14 @@ const WeeklyBook = ({ setLoggedIn }) => {
             console.log("Book already exists");
             toast.error(`${book?.volumeInfo?.title} is already in your Bookshelf!`)
         }
-
-        // console.log('clicked')
-        // console.log(state.currentUser.user_id)
     }
 
     useEffect(() => {
+        const storedBooks = localStorage.getItem('bookshelf');
+        if (storedBooks) {
+            setBooks(JSON.parse(storedBooks));
+        }
+        loadBookshelf()
         const fetchWeeklyBook = async () => {
             const response = await axios.get(
                 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction&maxResults=40'
@@ -98,9 +86,7 @@ const WeeklyBook = ({ setLoggedIn }) => {
                 setBook(storedBook);
             }
         };
-
         fetchWeeklyBook();
-
         const interval = setInterval(() => {
             fetchWeeklyBook();
         }, 604800000);
@@ -112,17 +98,12 @@ const WeeklyBook = ({ setLoggedIn }) => {
         justifyContent: "center"
     }
 
-    // useEffect(() => {
-    //     document.body.style.overflowX = "hidden";
-    //   }, []);
-
     if (!book) {
         return <div className="text-center" style={{ padding: "300px 0" }}><SyncLoader
             color="#FFD966"
             cssOverride={override}
         /></div>;
     }
-    
 
     return (
         <>
@@ -141,29 +122,26 @@ const WeeklyBook = ({ setLoggedIn }) => {
             <Logo />
             <h1 className="text-center botw">Book of the Week</h1>
             {book && !state.currentUser && <div className="text-center btnDiv">
-                <NavLink to="/login" className="btn btn-primary">Log in to add to your bookshelf!</NavLink>
+                <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>
             </div>}
             {book && state.currentUser &&
                 <div className="text-center btnDiv">
-                    <button onClick={handleClick} className="btn btn-primary">Add to my bookshelf!</button>
+                    <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
                 </div>
             }
-            <div className="container-fluid justify-content-center">
-                <div className="row">
-                    <div key={book.id} className="weekly-book cardPadding col-xs-12 col-sm-6 col-md-4">
-                        <div className="details-card text-center d-flex flex-column align-items-center">
-                            <img className="cardImage mx-auto card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
-                            <div className="card-body">
-                                <h5 className="card-title">{book.volumeInfo.title}</h5>
-                                <p className="card-text">{book.volumeInfo.authors[0]}</p>
-                                <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].type}</p>
-                                <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers[0].identifier}</p>
-                                <p className="card-text">{book.volumeInfo.publisher}</p>
-                                <p className="card-text">{book.volumeInfo.publishedDate}</p>
-                                <p className="card-text">{book.volumeInfo.description}</p>
-                                <a href={book.volumeInfo.previewLink} className="btn btn-primary">Preview Book!</a>
-                            </div>
-                        </div>
+            <div className="container">
+                <div className="flex-container">
+                    <div className="flex-child">
+                        <img className="details-card-image card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
+                    </div>
+                    <div className="flex-child text-center">
+                        <h5 className="card-title">{book.volumeInfo.title}</h5>
+                        <p>By {book.volumeInfo.authors?.[0]}</p>
+                        <p className="text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
+                        <p className="text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
+                        <p>{book.volumeInfo.publishedDate}</p>
+                        <p className="card-paragraph">{book.volumeInfo.description}</p>
+                        <a href={book.volumeInfo.previewLink}>Preview Book!</a>
                     </div>
                 </div>
             </div>

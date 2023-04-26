@@ -4,8 +4,9 @@ import AuthService from "../src/services/auth.service";
 import { useNavigate } from 'react-router-dom';
 import request from './services/api.request';
 import { useEffect, useState } from 'react';
+import { toast } from "react-hot-toast";
 
-function Nav({setLoggedIn}) {
+function Nav({ loggedIn, setLoggedIn }) {
     const [state, dispatch] = useGlobalState();
     const [data, setData] = useState();
     let navigate = useNavigate();
@@ -13,13 +14,16 @@ function Nav({setLoggedIn}) {
     const handleLogout = (e) => {
         e.preventDefault();
         AuthService.logout();
-        setLoggedIn(false)
         navigate('/logged-out');
         dispatch({
             currentUserToken: null,
             currentUser: null
         })
-        setLoggedIn(false)
+        toast.success("Successfully logged out")
+        if (loggedIn) {
+            setLoggedIn(false)
+        }
+        window.location.reload(true)
         localStorage.removeItem("bookshelf");
     }
 
@@ -34,7 +38,6 @@ function Nav({setLoggedIn}) {
             setData(response.data)
         }
         catch (error) {
-            // console.log(error);
             if (state.currentUser === null) {
 
             } else {
@@ -48,13 +51,11 @@ function Nav({setLoggedIn}) {
         // eslint-disable-next-line
     }, [])
 
-    // console.log(data)
-
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container-fluid">
-                    <NavLink to="/" className="nav-link active">Bookapedia Home</NavLink>
+                    <NavLink to="/" className="home-button nav-link active">Bookapedia Home</NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -68,7 +69,6 @@ function Nav({setLoggedIn}) {
                                     <NavLink to="/my-bookshelf" className="nav-link">{data.first_name}'s Bookshelf</NavLink>
                                 </li>
                             }
-                            {/* {data.first_name} */}
                             <li className="nav-item">
                                 <NavLink to="/book-randomizer" className="nav-link">Book Randomizer</NavLink>
                             </li>
@@ -78,15 +78,10 @@ function Nav({setLoggedIn}) {
                             {!state.currentUser && <li className="nav-item">
                                 <NavLink to="/login" className="nav-link">Log in</NavLink>
                             </li>}
-                            {state.currentUser && 
-                            <>
-                            {/* <li className="nav-item">
-                                <NavLink to="/profile" className="nav-link">Profile</NavLink>
-                            </li> */}
+                            {state.currentUser &&
                                 <li className="nav-item">
                                     <NavLink onClick={handleLogout} className="nav-link">Log out</NavLink>
                                 </li>
-                            </>
                             }
                         </ul>
                     </div>

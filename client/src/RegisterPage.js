@@ -4,12 +4,8 @@ import athena from "../src/imgs/athena.webp";
 import AuthService from "../src/services/auth.service";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import Footer from "./Footer";
-import { useGlobalState } from "../src/context/GlobalState";
 
 const RegisterPage = () => {
-    // eslint-disable-next-line
-    const [state, dispatch] = useGlobalState();
     const navigate = useNavigate();
     const [user, setUser] = useState({
         password: "",
@@ -29,10 +25,6 @@ const RegisterPage = () => {
     const handleRegister = (e) => {
         e.preventDefault();
         AuthService.register(user)
-        // dispatch({
-        //     currentUserToken: state.currentUserToken,
-        //     currentUser: state.currentUser.user_id,
-        // })
         navigate('/registration-success');
         window.location.reload(true);
     }
@@ -50,7 +42,7 @@ const RegisterPage = () => {
                                 <Logo />
                             </div>
 
-                            <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+                            <div className="container d-flex mx-auto mb-2">
 
                                 <form id="formstyle" onSubmit={handleRegister}>
 
@@ -60,44 +52,49 @@ const RegisterPage = () => {
                                         <input
                                             type="text"
                                             id="first_name"
-                                            className="form-control form-control-lg"
-                                            onChange={(e) => handleChange('firstName', e.target.value)} />
-                                        <label className="form-label" htmlFor="firstName">First Name</label>
+                                            className="form-control form-control-lg inputField"
+                                            onChange={(e) => handleChange('firstName', e.target.value)}
+                                            placeholder="First Name" />
+                                        <label className="form-label" htmlFor="firstName"></label>
                                     </div>
 
                                     <div className="form-outline mb-4">
                                         <input
                                             type="text"
                                             id="last_name"
-                                            className="form-control form-control-lg"
-                                            onChange={(e) => handleChange('lastName', e.target.value)} />
-                                        <label className="form-label" htmlFor="lastName">Last Name</label>
+                                            className="form-control form-control-lg inputField"
+                                            onChange={(e) => handleChange('lastName', e.target.value)}
+                                            placeholder="Last Name" />
+                                        <label className="form-label" htmlFor="lastName"></label>
                                     </div>
 
                                     <div className="form-outline mb-4">
                                         <input
                                             type="email"
                                             id="email"
-                                            className="form-control form-control-lg"
-                                            onChange={(e) => handleChange('email', e.target.value)} />
-                                        <label className="form-label" htmlFor="email">Email address</label>
+                                            className="form-control form-control-lg inputField"
+                                            onChange={(e) => handleChange('email', e.target.value)}
+                                            placeholder="Email Address" />
+                                        <label className="form-label" htmlFor="email"></label>
                                     </div>
 
                                     <div className="form-outline mb-4">
                                         <input
                                             type="password"
                                             id="password"
-                                            className="form-control form-control-lg"
-                                            onChange={(e) => handleChange('password', e.target.value)} />
-                                        <label className="form-label" htmlFor="form2Example28">Password</label>
+                                            className="form-control form-control-lg inputField"
+                                            onChange={(e) => handleChange('password', e.target.value)}
+                                            placeholder="Password" />
+                                        <label className="form-label" htmlFor="form2Example28"></label>
                                     </div>
                                     <div className="form-outline mb-4">
                                         <input
                                             type="password"
                                             id="passConf"
-                                            className="form-control form-control-lg"
-                                            onChange={(e) => handleChange('passwordConf', e.target.value)} />
-                                        <label className="form-label" htmlFor="form2Example28">Confirm Password</label>
+                                            className="form-control form-control-lg inputField"
+                                            onChange={(e) => handleChange('passwordConf', e.target.value)}
+                                            placeholder="Confirm Password" />
+                                        <label className="form-label" htmlFor="form2Example28"></label>
                                     </div>
 
                                     <div className="pt-1 mb-4">
@@ -112,13 +109,8 @@ const RegisterPage = () => {
                                             ) ? false : true}
                                         />
                                     </div>
-
-                                    {/* <p>Don't have an account? <a href="#!" className="link-secondary">Register here</a></p> */}
-
                                 </form>
-
                             </div>
-
                         </div>
                         <div className="col-sm-6 px-0 d-none d-sm-block">
                             <img id="loginimage" src={athena}
@@ -127,7 +119,6 @@ const RegisterPage = () => {
                     </div>
                 </div>
             </section>
-            {/* <Footer /> */}
         </>
     )
 }
