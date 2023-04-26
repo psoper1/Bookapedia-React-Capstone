@@ -52,7 +52,7 @@ const RegisterPage = () => {
                                         <input
                                             type="text"
                                             id="first_name"
-                                            className="form-control form-control-lg"
+                                            className="form-control form-control-lg inputField"
                                             onChange={(e) => handleChange('firstName', e.target.value)}
                                             placeholder="First Name" />
                                         <label className="form-label" htmlFor="firstName"></label>
@@ -62,7 +62,7 @@ const RegisterPage = () => {
                                         <input
                                             type="text"
                                             id="last_name"
-                                            className="form-control form-control-lg"
+                                            className="form-control form-control-lg inputField"
                                             onChange={(e) => handleChange('lastName', e.target.value)}
                                             placeholder="Last Name" />
                                         <label className="form-label" htmlFor="lastName"></label>
@@ -72,7 +72,7 @@ const RegisterPage = () => {
                                         <input
                                             type="email"
                                             id="email"
-                                            className="form-control form-control-lg"
+                                            className="form-control form-control-lg inputField"
                                             onChange={(e) => handleChange('email', e.target.value)}
                                             placeholder="Email Address" />
                                         <label className="form-label" htmlFor="email"></label>
@@ -82,7 +82,7 @@ const RegisterPage = () => {
                                         <input
                                             type="password"
                                             id="password"
-                                            className="form-control form-control-lg"
+                                            className="form-control form-control-lg inputField"
                                             onChange={(e) => handleChange('password', e.target.value)}
                                             placeholder="Password" />
                                         <label className="form-label" htmlFor="form2Example28"></label>
@@ -91,7 +91,7 @@ const RegisterPage = () => {
                                         <input
                                             type="password"
                                             id="passConf"
-                                            className="form-control form-control-lg"
+                                            className="form-control form-control-lg inputField"
                                             onChange={(e) => handleChange('passwordConf', e.target.value)}
                                             placeholder="Confirm Password" />
                                         <label className="form-label" htmlFor="form2Example28"></label>

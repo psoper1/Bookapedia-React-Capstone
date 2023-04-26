@@ -76,7 +76,7 @@ function LoginPage({ loggedIn, setLoggedIn }) {
                                             <input
                                                 type="email"
                                                 id="email"
-                                                className="form-control form-control-lg"
+                                                className="form-control form-control-lg inputField"
                                                 name="email"
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 required
@@ -90,7 +90,7 @@ function LoginPage({ loggedIn, setLoggedIn }) {
                                             <input
                                                 type="password"
                                                 id="password"
-                                                className="form-control form-control-lg"
+                                                className="form-control form-control-lg inputField"
                                                 name="password"
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 required
