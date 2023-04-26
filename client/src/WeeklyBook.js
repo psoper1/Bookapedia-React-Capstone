@@ -27,8 +27,6 @@ const WeeklyBook = ({ setLoggedIn }) => {
         } catch (error) {
             console.log(error);
         }
-        // console.log('clicked')
-        // console.log(state.currentUser.user_id)
     }
 
     const handleClick = async () => {
@@ -60,9 +58,6 @@ const WeeklyBook = ({ setLoggedIn }) => {
             console.log("Book already exists");
             toast.error(`${book?.volumeInfo?.title} is already in your Bookshelf!`)
         }
-
-        // console.log('clicked')
-        // console.log(state.currentUser.user_id)
     }
 
     useEffect(() => {

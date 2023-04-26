@@ -1,12 +1,11 @@
-// import Footer from "./Footer";
 import Logo from "./Logo";
 import Nav from "./Nav";
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import SyncLoader from 'react-spinners/SyncLoader'
 import request from './services/api.request';
+import HomeResults from "./HomeResults";
 
-function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
+function Home({ setBook, setView, setLoggedIn, loggedIn }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [clicked, setClicked] = useState(false);
@@ -29,8 +28,6 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
         } catch (error) {
             console.log(error);
         }
-        // console.log('clicked')
-        // console.log(state.currentUser.user_id)
     }
 
     useEffect(() => {
@@ -65,7 +62,6 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
 
     useEffect(() => {
         if (document.getElementById('input').value === "") {
-            // console.log('if statement')
         }
         else {
             fetchSearchResults();
@@ -83,8 +79,6 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
     const handleBookClick = (book) => {
         setBook(book);
         console.log(book)
-        // console.log('in handle book function')
-        // console.log(book)
     };
 
     const handlePageReload = () => {
@@ -100,7 +94,6 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
 
     return (
         <>
-            {/* <div className="bgImage"> */}
             <Nav setView={setView} setLoggedIn={setLoggedIn} />
             <Logo />
             <div className="form-outline text-center container">
@@ -129,51 +122,13 @@ function Home({ book, setBook, setView, user, setLoggedIn, loggedIn }) {
                             cssOverride={override}
                         />}
                     {clicked && searchResults.map((book) =>
-                        <div key={book.id} className="col-12 cardPadding col-lg-4">
-                            <div className="card text-center">
-                                <div className="row g-0">
-                                    <div className="col-6">
-                                        <img className="card-image card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
-                                    </div>
-                                    <div className="col-6">
-                                        <div className="card-body">
-                                            <h5 className="card-title">{book.volumeInfo.title}</h5>
-                                            <p className="card-text">{book.volumeInfo.authors?.[0]}</p>
-                                            <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
-                                            <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
-                                            <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <HomeResults book={book} handleBookClick={handleBookClick} />
                     )}
                     {searchResults && searchResults.map((book) =>
-                        <div key={book.id} className="col-12 cardPadding col-lg-4">
-                        <div className="card text-center">
-                            <div className="row g-0">
-                                <div className="col-6">
-                                    <img className="card-image card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
-                                </div>
-                                <div className="col-6">
-                                    <div className="card-body">
-                                        <h5 className="card-title">{book.volumeInfo.title}</h5>
-                                        <p className="card-text">{book.volumeInfo.authors?.[0]}</p>
-                                        <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
-                                        <p className="card-text text-muted">{book.volumeInfo.industryIdentifiers?.[0].identifier}</p>
-                                        <NavLink to="/chosen-book" className="btn stretched-link" onClick={() => handleBookClick(book)}>More Info</NavLink>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                        <HomeResults book={book} handleBookClick={handleBookClick} />
                     )}
                 </div>
             </div>
-            {/* </div> */}
-            {/* <Footer /> */}
-
         </>
     )
 }

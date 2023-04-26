@@ -7,7 +7,7 @@ import request from './services/api.request';
 import { NavLink } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
-const BookRandomizer = ({setLoggedIn, loggedIn}) => {
+const BookRandomizer = ({ setLoggedIn, loggedIn }) => {
   const [selectedBook, setSelectedBook] = useState(null);
   // eslint-disable-next-line
   const [state, dispatch] = useGlobalState();
@@ -28,8 +28,6 @@ const BookRandomizer = ({setLoggedIn, loggedIn}) => {
     } catch (error) {
       console.log(error);
     }
-    // console.log('clicked')
-    // console.log(state.currentUser.user_id)
   }
 
   useEffect(() => {
@@ -71,10 +69,6 @@ const BookRandomizer = ({setLoggedIn, loggedIn}) => {
       toast.error(`${selectedBook.volumeInfo.title} is already in your Bookshelf!`)
     }
     loadBookshelf();
-
-    // console.log('clicked')
-    // console.log(state.currentUser.user_id)
-    // navigate('/my-bookshelf');
   }
 
   const getRandomBook = async () => {
@@ -107,36 +101,36 @@ const BookRandomizer = ({setLoggedIn, loggedIn}) => {
       <div className="container-fluid">
         <div className="text-center btnDiv">
           {!selectedBook &&
-        <h4 className="text-center botw">Unsure of what to read next? Let us figure that out!</h4>
+            <h4 className="text-center botw">Unsure of what to read next? Let us figure that out!</h4>
           }
           {selectedBook &&
             <h4 className="text-center botw">Will it be this one?</h4>
           }
           <div className="container mx-auto">
-          <button className="btn bookshelfButton" onClick={getRandomBook}>Get Random Book</button>
-          {selectedBook && state.currentUser &&
-            <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
-          }
-          {selectedBook && !state.currentUser && <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>}
-        </div>
+            <button className="btn bookshelfButton" onClick={getRandomBook}>Get Random Book</button>
+            {selectedBook && state.currentUser &&
+              <button onClick={handleClick} className="btn bookshelfButton">Add to my bookshelf!</button>
+            }
+            {selectedBook && !state.currentUser && <NavLink to="/login" className="btn bookshelfButton">Log in to add to your bookshelf!</NavLink>}
+          </div>
         </div>
         {selectedBook && (
-           <div className="container">
-           <div className="flex-container">
-               <div className="flex-child">
-                   <img className="details-card-image card-img-top" src={selectedBook.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
-               </div>
-               <div className="flex-child text-center">
-                       <h5 className="card-title">{selectedBook.volumeInfo.title}</h5>
-                       <p>{selectedBook.volumeInfo.authors?.[0]}</p>
-                       <p className="text-muted">{selectedBook.volumeInfo.industryIdentifiers?.[0].type}</p>
-                       <p className="text-muted">{selectedBook.volumeInfo.industryIdentifiers?.[0].identifier}</p>
-                       <p>{selectedBook.volumeInfo.publishedDate}</p>
-                       <p className="card-paragraph">{selectedBook.volumeInfo.description}</p>
-                       <a href={selectedBook.volumeInfo.previewLink}>Preview Book!</a>
-               </div>
-           </div>
-           </div>
+          <div className="container">
+            <div className="flex-container">
+              <div className="flex-child">
+                <img className="details-card-image card-img-top" src={selectedBook.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
+              </div>
+              <div className="flex-child text-center">
+                <h5 className="card-title">{selectedBook.volumeInfo.title}</h5>
+                <p>{selectedBook.volumeInfo.authors?.[0]}</p>
+                <p className="text-muted">{selectedBook.volumeInfo.industryIdentifiers?.[0].type}</p>
+                <p className="text-muted">{selectedBook.volumeInfo.industryIdentifiers?.[0].identifier}</p>
+                <p>{selectedBook.volumeInfo.publishedDate}</p>
+                <p className="card-paragraph">{selectedBook.volumeInfo.description}</p>
+                <a href={selectedBook.volumeInfo.previewLink}>Preview Book!</a>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </>

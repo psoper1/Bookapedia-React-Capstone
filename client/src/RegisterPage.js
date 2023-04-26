@@ -4,11 +4,8 @@ import athena from "../src/imgs/athena.webp";
 import AuthService from "../src/services/auth.service";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGlobalState } from "../src/context/GlobalState";
 
 const RegisterPage = () => {
-    // eslint-disable-next-line
-    const [state, dispatch] = useGlobalState();
     const navigate = useNavigate();
     const [user, setUser] = useState({
         password: "",
@@ -28,10 +25,6 @@ const RegisterPage = () => {
     const handleRegister = (e) => {
         e.preventDefault();
         AuthService.register(user)
-        // dispatch({
-        //     currentUserToken: state.currentUserToken,
-        //     currentUser: state.currentUser.user_id,
-        // })
         navigate('/registration-success');
         window.location.reload(true);
     }
@@ -116,13 +109,8 @@ const RegisterPage = () => {
                                             ) ? false : true}
                                         />
                                     </div>
-
-                                    {/* <p>Don't have an account? <a href="#!" className="link-secondary">Register here</a></p> */}
-
                                 </form>
-
                             </div>
-
                         </div>
                         <div className="col-sm-6 px-0 d-none d-sm-block">
                             <img id="loginimage" src={athena}
@@ -131,7 +119,6 @@ const RegisterPage = () => {
                     </div>
                 </div>
             </section>
-            {/* <Footer /> */}
         </>
     )
 }

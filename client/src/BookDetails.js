@@ -6,7 +6,7 @@ import request from './services/api.request';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 
-const BookDetails = ({ book, shelfBook, setLoggedIn, loggedIn}) => {
+const BookDetails = ({ book, setLoggedIn, loggedIn }) => {
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
     const [books, setBooks] = useState();
@@ -54,13 +54,7 @@ const BookDetails = ({ book, shelfBook, setLoggedIn, loggedIn}) => {
             console.log("Book already exists");
             toast.error(`${book?.volumeInfo?.title} is already in your Bookshelf!`)
         }
-
-        // console.log('clicked')
-        // console.log(state.currentUser.user_id)
-        // navigate('/my-bookshelf');
     }
-
-    console.log(loggedIn)
 
     return (
         <>
@@ -83,12 +77,12 @@ const BookDetails = ({ book, shelfBook, setLoggedIn, loggedIn}) => {
                 </div>
             }
             {book &&
-            <div className="container">
-                <div className="flex-container">
-                    <div className="flex-child">
-                        <img className="details-card-image card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
-                    </div>
-                    <div className="flex-child text-center">
+                <div className="container">
+                    <div className="flex-container">
+                        <div className="flex-child">
+                            <img className="details-card-image card-img-top" src={book.volumeInfo.imageLinks?.smallThumbnail} alt="bookImage" />
+                        </div>
+                        <div className="flex-child text-center">
                             <h5 className="card-title">{book.volumeInfo.title}</h5>
                             <p>{book.volumeInfo.authors?.[0]}</p>
                             <p className="text-muted">{book.volumeInfo.industryIdentifiers?.[0].type}</p>
@@ -96,10 +90,10 @@ const BookDetails = ({ book, shelfBook, setLoggedIn, loggedIn}) => {
                             <p>{book.volumeInfo.publishedDate}</p>
                             <p className="card-paragraph">{book.volumeInfo.description}</p>
                             <a href={book.volumeInfo.previewLink}>Preview Book!</a>
+                        </div>
                     </div>
                 </div>
-                </div>
-                }
+            }
         </>
     );
 };

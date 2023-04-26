@@ -8,11 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import { useGlobalState } from "../src/context/GlobalState";
 import jwtDecode from "jwt-decode";
 import { Toaster } from 'react-hot-toast';
-// import Footer from "./Footer";
 
 
 
-function LoginPage({loggedIn, setLoggedIn}) {
+function LoginPage({ loggedIn, setLoggedIn }) {
     let navigate = useNavigate();
     // eslint-disable-next-line
     const [state, dispatch] = useGlobalState();
@@ -21,7 +20,6 @@ function LoginPage({loggedIn, setLoggedIn}) {
     const [password, setPassword] = useState("");
 
     const handleLogin = (e) => {
-        // console.log("clicked")
         e.preventDefault();
 
         AuthService
@@ -32,35 +30,31 @@ function LoginPage({loggedIn, setLoggedIn}) {
                     currentUserToken: resp.access,
                     currentUser: data
                 })
-                // console.log('after login')
-                // console.log(data)
-                // console.log('after login')
-                // navigate('/')
                 setLoggedIn(true)
             });
     }
 
     useEffect(() => {
         if (loggedIn) {
-        const timer = setTimeout(() => {
-          navigate('/');
-        }, 2000);
-        return () => clearTimeout(timer);
-    }
-      }, [navigate, loggedIn]);
+            const timer = setTimeout(() => {
+                navigate('/');
+            }, 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [navigate, loggedIn]);
 
     return (
         <>
             <Nav />
             <Toaster
-          position="top-center"
-          reverseOrder={false}
-          toastOptions={{
-            style: {
-              background: '#fff6db'
-            }
-          }}
-        />
+                position="top-center"
+                reverseOrder={false}
+                toastOptions={{
+                    style: {
+                        background: '#fff6db'
+                    }
+                }}
+            />
             <section className="vh-100">
                 <div className="container-fluid">
                     <div className="row">
@@ -73,46 +67,46 @@ function LoginPage({loggedIn, setLoggedIn}) {
 
                             <div className="container d-flex mx-auto mb-2">
 
-                                {!loggedIn && 
-                                <form id="formstyle" onSubmit={handleLogin}>
+                                {!loggedIn &&
+                                    <form id="formstyle" onSubmit={handleLogin}>
 
-                                    <h3 id="h3style" className="fw-normal mb-3 pb-3">Log in</h3>
+                                        <h3 id="h3style" className="fw-normal mb-3 pb-3">Log in</h3>
 
-                                    <div className="form-outline mb-4">
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            className="form-control form-control-lg"
-                                            name="email"
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            required
-                                            placeholder="Email Address"
-                                        />
+                                        <div className="form-outline mb-4">
+                                            <input
+                                                type="email"
+                                                id="email"
+                                                className="form-control form-control-lg"
+                                                name="email"
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                required
+                                                placeholder="Email Address"
+                                            />
 
-                                        <label className="form-label" htmlFor="email"></label>
-                                    </div>
+                                            <label className="form-label" htmlFor="email"></label>
+                                        </div>
 
-                                    <div className="form-outline mb-4">
-                                        <input
-                                            type="password"
-                                            id="password"
-                                            className="form-control form-control-lg"
-                                            name="password"
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            required
-                                            placeholder="Password"
-                                        />
+                                        <div className="form-outline mb-4">
+                                            <input
+                                                type="password"
+                                                id="password"
+                                                className="form-control form-control-lg"
+                                                name="password"
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                required
+                                                placeholder="Password"
+                                            />
 
-                                        <label className="form-label" htmlFor="password"></label>
-                                    </div>
+                                            <label className="form-label" htmlFor="password"></label>
+                                        </div>
 
-                                    <div className="pt-1 mb-4">
-                                        <input className="btn btn-info btn-lg" type="submit" value="Sign in" />
-                                    </div>
+                                        <div className="pt-1 mb-4">
+                                            <input className="btn btn-info btn-lg" type="submit" value="Sign in" />
+                                        </div>
 
-                                    <p>Don't have an account? <NavLink to="/register" className="link-secondary">Register here</NavLink></p>
+                                        <p>Don't have an account? <NavLink to="/register" className="link-secondary">Register here</NavLink></p>
 
-                                </form>}
+                                    </form>}
                                 {loggedIn && <div className="mx-auto">Thank you for logging in! Redirecting to the Home page of Bookapedia!</div>}
 
                             </div>
@@ -125,7 +119,6 @@ function LoginPage({loggedIn, setLoggedIn}) {
                     </div>
                 </div>
             </section>
-            {/* <Footer /> */}
         </>
     )
 }

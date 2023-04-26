@@ -14,7 +14,6 @@ function Nav({ loggedIn, setLoggedIn }) {
     const handleLogout = (e) => {
         e.preventDefault();
         AuthService.logout();
-        // setLoggedIn(false)
         navigate('/logged-out');
         dispatch({
             currentUserToken: null,
@@ -39,7 +38,6 @@ function Nav({ loggedIn, setLoggedIn }) {
             setData(response.data)
         }
         catch (error) {
-            // console.log(error);
             if (state.currentUser === null) {
 
             } else {
@@ -52,8 +50,6 @@ function Nav({ loggedIn, setLoggedIn }) {
         loadUser()
         // eslint-disable-next-line
     }, [])
-
-    // console.log(data)
 
     return (
         <>
@@ -73,7 +69,6 @@ function Nav({ loggedIn, setLoggedIn }) {
                                     <NavLink to="/my-bookshelf" className="nav-link">{data.first_name}'s Bookshelf</NavLink>
                                 </li>
                             }
-                            {/* {data.first_name} */}
                             <li className="nav-item">
                                 <NavLink to="/book-randomizer" className="nav-link">Book Randomizer</NavLink>
                             </li>
@@ -84,14 +79,9 @@ function Nav({ loggedIn, setLoggedIn }) {
                                 <NavLink to="/login" className="nav-link">Log in</NavLink>
                             </li>}
                             {state.currentUser &&
-                                <>
-                                    {/* <li className="nav-item">
-                                <NavLink to="/profile" className="nav-link">Profile</NavLink>
-                            </li> */}
-                                    <li className="nav-item">
-                                        <NavLink onClick={handleLogout} className="nav-link">Log out</NavLink>
-                                    </li>
-                                </>
+                                <li className="nav-item">
+                                    <NavLink onClick={handleLogout} className="nav-link">Log out</NavLink>
+                                </li>
                             }
                         </ul>
                     </div>

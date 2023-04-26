@@ -1,16 +1,14 @@
-// import Footer from "./Footer";
 import Logo from "./Logo";
 import Nav from "./Nav";
 import { NavLink } from "react-router-dom";
-import { useGlobalState } from "../src/context/GlobalState";
 import request from './services/api.request';
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import xbutton from '../src/imgs/x-button.png';
+import openBook from '../src/imgs/open-book.png';
+import closedBook from '../src/imgs/closed-book.png';
+import questionMark from '../src/imgs/question.png';
 
-function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
-    // eslint-disable-next-line
-    const [state, dispatch] = useGlobalState();
+function MyBookshelf({ setShelfBook, setLoggedIn }) {
     const [data, setData] = useState([]);
     const [books, setBooks] = useState([])
 
@@ -27,8 +25,6 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
         } catch (error) {
             console.log(error);
         }
-        // console.log('clicked')
-        // console.log(state.currentUser.user_id)
     }
 
     useEffect(() => {
@@ -65,8 +61,6 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
         } catch (error) {
             console.log(error);
         }
-        // console.log('clicked')
-        // console.log(shelfBook.id)
     }
 
     const handleRead = async (shelfBook) => {
@@ -76,41 +70,21 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
                 url: `books/${shelfBook.id}/`,
                 method: 'PATCH',
                 data: {
-                    marked_read: true
+                    marked_read: !shelfBook.marked_read
                 }
             }
-            let response = await request(options)
-            console.log(response.data)
-            setData(response.data)
+            await request(options)
+            let newData = [...data] // create new copy of state, so when you pass to setData it rerenders
+            let chosenBookIndex = data.findIndex(b => b.id === shelfBook.id); // grab index of the book you wanna update
+            newData[chosenBookIndex] = {
+                ...newData[chosenBookIndex],
+                marked_read: !shelfBook.marked_read
+            }
+            setData(newData)
+            loadBookshelf();
         } catch (error) {
             console.log(error);
         }
-        setData(data.filter(b => shelfBook.id !== b.id))
-        loadBookshelf()
-        // console.log('clicked')
-        // console.log(shelfBook.id)
-    }
-
-    const handleNotRead = async (shelfBook) => {
-        console.log('in handleRead')
-        try {
-            let options = {
-                url: `books/${shelfBook.id}/`,
-                method: 'PATCH',
-                data: {
-                    marked_read: false
-                }
-            }
-            let response = await request(options)
-            console.log(response.data)
-            setData(response.data)
-        } catch (error) {
-            console.log(error);
-        }
-        setData(data.filter(b => shelfBook.id !== b.id))
-        loadBookshelf()
-        // console.log('clicked')
-        // console.log(shelfBook.id)
     }
 
     const getRead = async () => {
@@ -125,8 +99,6 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
         } catch (error) {
             console.log(error);
         }
-        // console.log('clicked')
-        // console.log(data)
     }
 
     const getUnread = async () => {
@@ -141,14 +113,10 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
         } catch (error) {
             console.log(error);
         }
-        // console.log('clicked')
-        // console.log(data)
     }
 
     const handleBookClick = (shelfBook) => {
         setShelfBook(shelfBook);
-        // console.log('in handle book function')
-        // console.log(shelfBook)
     };
 
 
@@ -176,45 +144,31 @@ function MyBookshelf({ book, setBook, setShelfBook, setLoggedIn }) {
                     </div>
                     <div className="row">
                         {data.map((shelfBook) =>
-                        <div key={shelfBook.id} className="col-12 cardPadding col-lg-4">
-                            <div className="card text-center">
-                                <div className="row g-0">
-                                    <div className="col-6">
-                                        <img className="card-image card-img-top" src={shelfBook.image_link} alt="bookImage" />
-                                    </div>
-                                    <div className="col-6">
-                                        <div className="card-body d-flex flex-column">
-                                            <h5 className="card-title">{shelfBook.title}</h5>
-                                            <p className="card-text">{shelfBook.author}</p>
-                                            {shelfBook.marked_read &&
-                                            <p>Read!</p>
-                                            }
-                                            <div className="bookshelf-buttons">
-                                            {!shelfBook.marked_read &&
-                                        <NavLink className="btn btn-sm mark-read" onClick={() => handleRead(shelfBook)}>Mark Read</NavLink>
-                                    }
-                                    {shelfBook.marked_read &&
-                                        <>
-                                            {/* <NavLink className="btn btn-sm read">Read!</NavLink> */}
-                                            <NavLink className="btn btn-sm mark-unread" onClick={() => handleNotRead(shelfBook)}>Mark Unread</NavLink>
-                                        </>
-                                    }
-                                    <NavLink to="/bookshelf-book-details" className="btn btn-sm more-info" onClick={() => handleBookClick(shelfBook)}>More Info</NavLink>
-                                            {/* <button className="random-button" onClick={() => handleDelete(shelfBook)}>
-                                                <img className="delete-item" src={xbutton} alt="delete"/>
-                                            </button> */}
+                            <div key={shelfBook.id} className="col-12 cardPadding col-lg-4">
+                                <div className="card text-center">
+                                    <div className="row g-0">
+                                        <div className="col-6">
+                                            <img className="card-image card-img-top" src={shelfBook.image_link} alt="bookImage" />
                                         </div>
-                                        <button className="random-button" onClick={() => handleDelete(shelfBook)}>
-                                                <img className="delete-item" src={xbutton} alt="delete"/>
-                                            </button>
+                                        <div className="col-6">
+                                            <div className="card-body d-flex flex-column">
+                                                <h5 className="card-title">{shelfBook.title}</h5>
+                                                <p className="card-text">{shelfBook.author}</p>
+                                                <div className="card-footer">
+                                                    <NavLink className="" onClick={() => handleRead(shelfBook)}>
+                                                        <img className="read-button" src={shelfBook.marked_read ? closedBook : openBook} alt={`Mark ${shelfBook.marked_read ? 'Unread' : 'Read'}`} />
+                                                    </NavLink>
+
+                                                    <NavLink to="/bookshelf-book-details" className="read-button" onClick={() => handleBookClick(shelfBook)}><img src={questionMark} alt="More Info" /></NavLink>
+                                                    <button className="random-button" onClick={() => handleDelete(shelfBook)} />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>)}
+                            </div>)}
                     </div>
                 </div>
-                {/* <Footer /> */}
             </div>
         </>
     )

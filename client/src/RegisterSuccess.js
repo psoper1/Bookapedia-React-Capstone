@@ -1,6 +1,5 @@
 import Nav from "./Nav";
 import athena from "../src/imgs/athena.webp";
-// import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

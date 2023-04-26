@@ -6,7 +6,7 @@
     flex: 1;
     height: 10%;
     padding-top: 20px;
-}  
+}
 
 .flex-child:first-child {
     margin-right: 20px;
@@ -47,22 +47,44 @@
 .bookshelf-buttons {
     justify-content: center;
     display: flex;
-    /* position: fixed; */
-    margin-top: 230px;
+    margin-top: 87px;
+}
+
+.read-buttons {
+    height: 10%;
+    border: none;
+    background: none;
+    margin-bottom: 44%;
+    position: absolute;
+    top: 269px;
+}
+
+.more-info {
+    height: 10%;
+    border: none;
+    background: none;
+    margin-bottom: 44%;
+    position: absolute;
+    top: 5px;
+    margin-left: 136px;
+}
+
+.more-info-home {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.read-button {
+    width: 30px;
 }
 
 .bookshelfButton {
     margin-top: 15px;
 }
 
-.mark-read, .read, .mark-unread, .more-info {
-    margin-top: 5px;
-}
-
 .logo-text {
     font-family: Cinzel;
-    /* border-left: 2px solid #ddbf3d;
-    padding-left: 5px; */
 }
 
 .logo-container {
@@ -81,7 +103,6 @@
 
 .botw {
     font-family: Castoro Titling;
-    /* margin-left: 55px; */
 }
 
 .auText {
@@ -94,7 +115,7 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
 }
 
-.card > .row > .col-6 {
+.card>.row>.col-6 {
     aspect-ratio: 2/3;
 }
 
@@ -102,6 +123,17 @@
     object-fit: cover;
     height: 100%;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    align-items: center;
+}
+
+.card-body {
+    height: 100%;
 }
 
 .card-title {
@@ -122,17 +154,19 @@
     margin-bottom: 44%;
     position: absolute;
     top: 5px;
-    left: 5px;
-    border: 2px solid black;
+    left: 389px;
     border-radius: 40px;
-    background: rgba(255, 255, 255, 0.493);
+    background: rgba(255, 255, 255, 0);
     width: 22px;
     height: 23px;
 }
 
 .random-button {
+    height: 20px;
+    width: 20px;
     border: none;
-    background-color: #00000000;
+    background: url('../src/imgs/x-button.png') no-repeat;
+    background-size: 20px;
 }
 
 .footer {
@@ -161,11 +195,11 @@
 
 @media (max-width: 767px) {
     .weekly-book {
-      width: 100%;
-      margin-left: 1%;
-      margin-right: 1%;
+        width: 100%;
+        margin-left: 1%;
+        margin-right: 1%;
     }
-  }
+}
 
 .details-card {
     width: 100%;
@@ -181,7 +215,6 @@
     margin-left: auto;
     margin-top: 4%;
     z-index: 0;
-    /* background-color: #ddb99d; */
 }
 
 .about {
