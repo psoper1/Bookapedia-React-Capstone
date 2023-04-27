@@ -18,7 +18,7 @@ function RegisterSuccess() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            navigate('/login');
+            navigate('/');
         }, 4000);
         return () => clearTimeout(timer);
         // eslint-disable-next-line
