@@ -24,9 +24,12 @@ const RegisterPage = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        AuthService.register(user)
-        navigate('/registration-success');
-        window.location.reload(true);
+        AuthService.register(user).then(() => {
+            navigate('/registration-success');
+            window.location.reload(true);
+        })
+        // navigate('/registration-success');
+        // window.location.reload(true);
     }
 
     return (
