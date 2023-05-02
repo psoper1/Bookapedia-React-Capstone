@@ -103,7 +103,7 @@ function Home({ setBook, setView, setLoggedIn, loggedIn }) {
                             id="input"
                             className="inputField form-control mx-auto mb-2"
                             type="text"
-                            placeholder="Type here to search for a book! :)"
+                            placeholder="Type here to search for a book!"
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
                         />
