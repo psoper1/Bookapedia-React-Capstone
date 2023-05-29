@@ -18,6 +18,8 @@ const BookDetails = ({ book, setLoggedIn, loggedIn }) => {
         }
     }, []);
 
+    if(!book) book = state?.chosenBook
+
     const handleClick = async () => {
         const isDuplicate = books.find(newBook => newBook.title === book?.volumeInfo?.title);
         if (!isDuplicate) {

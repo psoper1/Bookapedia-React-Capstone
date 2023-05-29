@@ -11,6 +11,9 @@ import LogoutPage from "./LogoutPage";
 import BookRandomizer from "./BookRandomizer";
 import WeeklyBook from "./WeeklyBook";
 import BookShelfDetails from "./BookShelfDetails";
+import Categories from "./pages/Categories/Categories";
+import Page from "./pages/Page";
+import Category from "./pages/Category";
 
 function App() {
   const [book, setBook] = useState(null);
@@ -34,6 +37,8 @@ function App() {
             <Route path="book-randomizer" element={<BookRandomizer setLoggedIn={setLoggedIn} loggedIn={{loggedIn}} />} />
             <Route path="/book-of-the-week" element={<WeeklyBook />} />
             <Route path="/bookshelf-book-details" element={<BookShelfDetails shelfBook={shelfBook}/>} setLoggedIn={setLoggedIn} />
+            <Route path="/categories" element={<Page><Categories /></Page>} />
+            <Route path="/categories/:category" element={<Page><Category /></Page>} />
           </Routes>
         </Router>
     </>
