@@ -96,6 +96,16 @@ function Home({ setBook, setView, setLoggedIn, loggedIn }) {
         <>
             <Nav setView={setView} setLoggedIn={setLoggedIn} />
             <Logo />
+            <aside className="card position-absolute bottom-50 start-0" style={{"width": "18rem;"}}>
+                <div className="card-header">
+                    Categories
+                </div>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item">ART</li>
+                    <li className="list-group-item">DRAMA</li>
+                    <li className="list-group-item">PHILOSOPHY</li>
+                </ul>
+            </aside>
             <div className="form-outline text-center container">
                 <form className="row justify-content-center">
                     <div className="col-12">
