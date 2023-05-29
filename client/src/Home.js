@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import SyncLoader from 'react-spinners/SyncLoader'
 import request from './services/api.request';
 import HomeResults from "./HomeResults";
+import { Link } from "react-router-dom";
 
 function Home({ setBook, setView, setLoggedIn, loggedIn }) {
     const [searchQuery, setSearchQuery] = useState("");
@@ -96,6 +97,16 @@ function Home({ setBook, setView, setLoggedIn, loggedIn }) {
         <>
             <Nav setView={setView} setLoggedIn={setLoggedIn} />
             <Logo />
+            <aside className="card position-absolute bottom-50 start-0" style={{"width": "18rem"}}>
+                <Link to={'/categories'} className="card-header">
+                    Categories
+                </Link>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item"><Link to='/categories/art'>ART</Link></li>
+                    <li className="list-group-item"><Link to='/categories/drama'>DRAMA</Link></li>
+                    <li className="list-group-item"><Link to='/categories/philosophy'>PHILOSOPHY</Link></li>
+                </ul>
+            </aside>
             <div className="form-outline text-center container">
                 <form className="row justify-content-center">
                     <div className="col-12">
